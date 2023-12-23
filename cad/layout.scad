@@ -100,6 +100,8 @@ module pcb_mid() {
   ]);
 }
 
+hand_margin = 2*cdx;
+
 module pcb() {
   $fs = 0.05;
   color("IndianRed")
@@ -107,11 +109,11 @@ module pcb() {
   linear_extrude(1.6, center=false)
   offset(r = 1)
   union() {
-    translate([-3*cdx, 0, 0])
+    translate([-hand_margin, 0, 0])
     rotate(-15)
     translate([-3*cdx, 0, 0])
     pcb_half();
-    translate([3*cdx, 0, 0])
+    translate([hand_margin, 0, 0])
     rotate(15)
     mirror([1,0,0])
     translate([-3*cdx, 0, 0])
@@ -121,11 +123,11 @@ module pcb() {
 }
 
 module layout(with_kc=true, with_pico=true) {
-  translate([-3*cdx, 0, 0])
+  translate([-hand_margin, 0, 0])
   rotate(-15)
   translate([-3*cdx, 0, 0])
   layout_lh(with_kc=with_kc);
-  translate([3*cdx, 0, 0])
+  translate([hand_margin, 0, 0])
   rotate(15)
   layout_rh(with_kc=with_kc);
   if (with_pico) {

@@ -1,3 +1,4 @@
 *-backups/
 .fr-*/
 fp-info-cache
+.DS_Store
