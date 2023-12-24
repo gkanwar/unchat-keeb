@@ -95,8 +95,8 @@ module pcb_half() {
 
 module pcb_mid() {
   polygon([
-    [-3*cdx,-2*cdy], [3*cdx,-2*cdy],
-    [3*cdx,2*cdy], [-3*cdx,2*cdy]
+    [-2.5*cdx,-2.2*cdy], [2.5*cdx,-2.2*cdy],
+    [2.5*cdx,2*cdy], [-2.5*cdx,2*cdy]
   ]);
 }
 
