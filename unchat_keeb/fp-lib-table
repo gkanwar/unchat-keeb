@@ -2,5 +2,5 @@
   (version 7)
   (lib (name "ScottoKeebs_Choc")(type "KiCad")(uri "${KIPRJMOD}/../ScottoKicad/footprints/ScottoKeebs_Choc.pretty")(options "")(descr ""))
   (lib (name "ScottoKeebs_MCU")(type "KiCad")(uri "${KIPRJMOD}/../ScottoKicad/footprints/ScottoKeebs_MCU.pretty")(options "")(descr ""))
-  (lib (name "GKanwar")(type "KiCad")(uri "${KIPRJMOD}/../GKanwarKicad/GKanwarLibrary.pretty")(options "")(descr ""))
+  (lib (name "GKanwarLibrary")(type "KiCad")(uri "${KIPRJMOD}/../GKanwarKicad/GKanwarLibrary.pretty")(options "")(descr ""))
 )
