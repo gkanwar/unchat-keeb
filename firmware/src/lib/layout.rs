@@ -1,25 +1,62 @@
 use serde::{Serialize, Deserialize, Serializer, Deserializer};
-use serde::de::Error;
+use serde::de::Error as DError;
+use serde::ser::Error as SError;
 use core::result::Result;
 use heapless::Vec;
+use core::str;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Keymap {
   layers: Vec<Vec<Behavior, 128>, 8>,
 }
 
+fn make_layer_str(prefix: &str, layer: u32, layer_buf: &mut [u8]) -> Result<(), &'static str> {
+  if prefix.len() != 2 {
+    return Result::Err("invalid layer prefix");
+  }
+  layer_buf[0] = prefix.bytes().nth(0).ok_or("invalid prefix")?;
+  layer_buf[1] = prefix.bytes().nth(1).ok_or("invalid prefix")?;
+  // NOTE: panics on encoding problem
+  '('.encode_utf8(&mut layer_buf[2..3]);
+  char::from_digit(layer, 10).ok_or("invalid layer")?
+    .encode_utf8(&mut layer_buf[3..4]);
+  ')'.encode_utf8(&mut layer_buf[4..5]);
+  return Ok(());
+}
+
 macro_rules! make_behavior_enum {
   ( $(($variant:ident, $label:literal)),* $(,)? ) => {
     #[derive(Debug)]
     pub enum Behavior {
-      $($variant),*
-      }
+      $($variant),* ,
+      LayerGoto(u32),
+      LayerMod(u32),
+      LayerToggle(u32),
+      LayerTapToggle(u32),
+    }
     impl Serialize for Behavior {
       fn serialize<S>(&self, ser: S) -> Result<S::Ok, S::Error>
       where S: Serializer
       {
+        let mut layer_buf: [u8; 5] = [0; 5];
         ser.serialize_str(match *self {
-          $(Behavior::$variant => $label),*
+          $(Behavior::$variant => $label),* ,
+          Behavior::LayerGoto(i) => {
+            make_layer_str("TO", i, &mut layer_buf).map_err(S::Error::custom)?;
+            str::from_utf8(&layer_buf[..]).map_err(S::Error::custom)?
+          }
+          Behavior::LayerMod(i) => {
+            make_layer_str("MO", i, &mut layer_buf).map_err(S::Error::custom)?;
+            str::from_utf8(&layer_buf[..]).map_err(S::Error::custom)?
+          },
+          Behavior::LayerToggle(i) => {
+            make_layer_str("TG", i, &mut layer_buf).map_err(S::Error::custom)?;
+            str::from_utf8(&layer_buf[..]).map_err(S::Error::custom)?
+          },
+          Behavior::LayerTapToggle(i) => {
+            make_layer_str("TT", i, &mut layer_buf).map_err(S::Error::custom)?;
+            str::from_utf8(&layer_buf[..]).map_err(S::Error::custom)?
+          },
         })
       }
     }
@@ -28,6 +65,26 @@ macro_rules! make_behavior_enum {
       where D: Deserializer<'de>
       {
         let s: &str = <&str>::deserialize(de)?;
+        if s.starts_with("TO(") && s.ends_with(")") {
+          let i: u32 = s[3..s.len()-1].parse::<u32>()
+            .map_err(D::Error::custom)?;
+          return Ok(Behavior::LayerGoto(i));
+        }
+        if s.starts_with("MO(") && s.ends_with(")") {
+          let i: u32 = s[3..s.len()-1].parse::<u32>()
+            .map_err(D::Error::custom)?;
+          return Ok(Behavior::LayerMod(i));
+        }
+        if s.starts_with("TG(") && s.ends_with(")") {
+          let i: u32 = s[3..s.len()-1].parse::<u32>()
+            .map_err(D::Error::custom)?;
+          return Ok(Behavior::LayerToggle(i));
+        }
+        if s.starts_with("TT(") && s.ends_with(")") {
+          let i: u32 = s[3..s.len()-1].parse::<u32>()
+            .map_err(D::Error::custom)?;
+          return Ok(Behavior::LayerTapToggle(i));
+        }
         Ok(match s {
           $($label => Behavior::$variant),* ,
           &_ => {
@@ -40,16 +97,20 @@ macro_rules! make_behavior_enum {
 }
 
 make_behavior_enum!(
+  // special keys
   (Tab, "KC_TAB"),
   (Space, "KC_SPC"),
   (Backspace, "KC_BSPC"),
-  (LCtrl, "KC_LCTL"),
-  (RCtrl, "KC_RCTL"),
-  (LAlt, "KC_LALT"),
-  (RAlt, "KC_RALT"),
-  (LShift, "KC_LSFT"),
-  (RShift, "KC_RSFT"),
-  (LGui, "KC_LGUI"),
+  (Escape, "KC_ESC"),
+  (ArrowUp, "KC_UP"),
+  (ArrowDown, "KC_DOWN"),
+  (ArrowLeft, "KC_LEFT"),
+  (ArrowRight, "KC_RGHT"),
+  (Home, "KC_HOME"),
+  (End, "KC_END"),
+  (PageUp, "KC_PGUP"),
+  (PageDown, "KC_PGDN"),
+  // letters
   (A, "KC_A"),
   (B, "KC_B"),
   (C, "KC_C"),
@@ -76,10 +137,65 @@ make_behavior_enum!(
   (X, "KC_X"),
   (Y, "KC_Y"),
   (Z, "KC_Z"),
+  // numbers
+  (Num0, "KC_0"),
+  (Num1, "KC_1"),
+  (Num2, "KC_2"),
+  (Num3, "KC_3"),
+  (Num4, "KC_4"),
+  (Num5, "KC_5"),
+  (Num6, "KC_6"),
+  (Num7, "KC_7"),
+  (Num8, "KC_8"),
+  (Num9, "KC_9"),
+  // f-keys
+  (F1, "KC_F1"),
+  (F2, "KC_F2"),
+  (F3, "KC_F3"),
+  (F4, "KC_F4"),
+  (F5, "KC_F5"),
+  (F6, "KC_F6"),
+  (F7, "KC_F7"),
+  (F8, "KC_F8"),
+  (F9, "KC_F9"),
+  (F10, "KC_F10"),
+  (F11, "KC_F11"),
+  (F12, "KC_F12"),
+  // symbols
   (Comma, "KC_COMM"),
   (Dot, "KC_DOT"),
   (Slash, "KC_SLSH"),
+  (Backslash, "KC_BSLS"),
   (Quote, "KC_QUOT"),
+  (LBrace, "KC_LBRC"),
+  (RBrace, "KC_RBRC"),
+  (Grave, "KC_GRV"),
+  (Semicolon, "KC_SCLN"),
+  (Equals, "KC_EQL"),
+  (Minus, "KC_MINS"),
+  // special functions
+  (PrintScreen, "KC_PSCR"),
+  (VolMute, "KC_MUTE"),
+  (VolUp, "KC_VOLU"),
+  (VolDown, "KC_VOLD"),
+  // see to layer below
+  (Transparent, "KC_TRNS"),
+  // noop
+  (Noop, "KC_NO"),
+  // modifiers
+  (LCtrl, "KC_LCTL"),
+  (RCtrl, "KC_RCTL"),
+  (LAlt, "KC_LALT"),
+  (RAlt, "KC_RALT"),
+  (LShift, "KC_LSFT"),
+  (RShift, "KC_RSFT"),
+  (LGui, "KC_LGUI"),
+  (RGui, "KC_RGUI"),
+  // keyboard controls
+  (BacklightToggle, "BL_TOGG"),
+  (BacklightUp, "BL_UP"),
+  (BacklightDown, "BL_DOWN"),
+  (Reset, "QK_BOOT"),
 );
 
 #[cfg(test)]
@@ -88,7 +204,7 @@ mod tests {
   #[test]
   fn can_deser_keymap() -> Result<(), String> {
     let (_layout, _bytes_read): (Keymap, usize) =
-      serde_json::from_slice(include_bytes!("../../keymaps/split-42.json"))
+      serde_json::from_slice(include_bytes!("../../keymaps/split-42-colemak.json"))
       .map_err(|e| format!("{}", e))?;
     Ok(())
   }
