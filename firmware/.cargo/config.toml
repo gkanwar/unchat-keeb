@@ -6,7 +6,3 @@ rustflags = [
   "-C", "inline-threshold=5",
   "-C", "no-vectorize-loops",
 ]
-
-[build]
-target = "thumbv6m-none-eabi"
-
