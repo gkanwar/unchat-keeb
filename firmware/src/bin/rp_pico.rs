@@ -21,6 +21,8 @@ use core::panic::PanicInfo;
 
 use keeb::{
   Error,
+  layout::{Keymap},
+  board::{Board},
   bus::{TryIntoInputPin, TryIntoOutputPin}
 };
 
@@ -49,6 +51,15 @@ impl GpioIn {
 
 struct GpioOut {
   pin: gpio::Pin<gpio::DynPinId, PinOut, PinPD>
+}
+impl GpioOut {
+  fn new<I: gpio::PinId, F: gpio::Function, P: gpio::PullType>(
+    pin: gpio::Pin<I, F, P>) -> Self
+  where I: gpio::ValidFunction<PinOut> {
+    Self {
+      pin: pin.into_push_pull_output().into_pull_type().into_dyn_pin()
+    }
+  }
 }
 
 impl InputPin for GpioIn {
@@ -92,8 +103,54 @@ impl TryIntoInputPin for GpioOut {
   }
 }
 
+struct UserPins {
+  led: GpioOut,
+  general_pins: [GpioIn; 26],
+  general_ids: [usize; 26],
+}
+
+fn into_user_pins(pins: bsp::Pins) -> UserPins {
+  UserPins {
+    led: GpioOut::new(pins.led),
+    general_pins: [
+      GpioIn::new(pins.gpio0),
+      GpioIn::new(pins.gpio1),
+      GpioIn::new(pins.gpio2),
+      GpioIn::new(pins.gpio3),
+      GpioIn::new(pins.gpio4),
+      GpioIn::new(pins.gpio5),
+      GpioIn::new(pins.gpio6),
+      GpioIn::new(pins.gpio7),
+      GpioIn::new(pins.gpio8),
+      GpioIn::new(pins.gpio9),
+      GpioIn::new(pins.gpio10),
+      GpioIn::new(pins.gpio11),
+      GpioIn::new(pins.gpio12),
+      GpioIn::new(pins.gpio13),
+      GpioIn::new(pins.gpio14),
+      GpioIn::new(pins.gpio15),
+      GpioIn::new(pins.gpio16),
+      GpioIn::new(pins.gpio17),
+      GpioIn::new(pins.gpio18),
+      GpioIn::new(pins.gpio19),
+      GpioIn::new(pins.gpio20),
+      GpioIn::new(pins.gpio21),
+      GpioIn::new(pins.gpio22),
+      GpioIn::new(pins.gpio26),
+      GpioIn::new(pins.gpio27),
+      GpioIn::new(pins.gpio28),
+    ],
+    general_ids: [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+      11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+      21, 22, 26, 27, 28
+    ],
+  }
+}
+
 #[entry]
 fn rp2040_main() -> ! {
+  // init board state and components
   let mut pac = pac::Peripherals::take().unwrap();
   let core = pac::CorePeripherals::take().unwrap();
   let mut watchdog = watchdog::Watchdog::new(pac.WATCHDOG);
@@ -113,16 +170,41 @@ fn rp2040_main() -> ! {
     &mut pac.RESETS,
   );
 
-  let mut led_pin = pins.led.into_push_pull_output();
+  // load keymap
+  let (layout, _bytes_read): (Keymap, usize) =
+    serde_json::from_slice(include_bytes!("../../keymaps/split-42-colemak.json"))
+    .unwrap();
 
-  let mut in_bus = keeb::bus::InputBus {
+  // load board
+  let (board, _bytes_read): (Board, usize) =
+    serde_json::from_slice(include_bytes!("../../boards/unchat-42.json"))
+    .unwrap();
+
+  let user_pins = into_user_pins(pins);
+  let mut led_pin = user_pins.led;
+  let mut general_pins = user_pins.general_pins;
+  let mut general_ids = user_pins.general_ids;
+
+  // work around ownership semantics by clobbering user_pins
+  for i in 0..board.bus_pins.len() {
+    let p = board.bus_pins[i];
+    let idx = general_ids.iter().position(|&i| i == p).unwrap();
+    general_pins.swap(idx, i);
+    general_ids.swap(idx, i);
+  }
+  // let (bus_pins, general_pins) = general_pins.split_at(6);
+  // let (_, general_ids) = general_ids.split_at(6);
+
+  let mut it = general_pins.into_iter();
+
+  let mut in_bus = keeb::bus::InputBus::<GpioIn> {
     pins: [
-      GpioIn::new(pins.gpio0),
-      GpioIn::new(pins.gpio1),
-      GpioIn::new(pins.gpio2),
-      GpioIn::new(pins.gpio3),
-      GpioIn::new(pins.gpio4),
-      GpioIn::new(pins.gpio5),
+      it.next().unwrap(),
+      it.next().unwrap(),
+      it.next().unwrap(),
+      it.next().unwrap(),
+      it.next().unwrap(),
+      it.next().unwrap(),
     ]
   };
   let mut out_bus = in_bus.into_output_bus();

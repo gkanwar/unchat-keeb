@@ -5,9 +5,63 @@ use core::result::Result;
 use heapless::Vec;
 use core::str;
 
+use crate::consts::*;
+
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Keymap {
-  layers: Vec<Vec<Behavior, 128>, 8>,
+  layout: LayoutKind,
+  layers: Vec<Vec<Behavior, MAX_KEYS>, MAX_LAYERS>,
+}
+
+#[derive(Debug)]
+pub enum LayoutKind {
+  LayoutSplit3x6_3,
+}
+
+impl Serialize for LayoutKind {
+  fn serialize<S>(&self, ser: S) -> Result<S::Ok, S::Error>
+  where S: Serializer
+  {
+    ser.serialize_str(match *self {
+      LayoutKind::LayoutSplit3x6_3 => "LAYOUT_split_3x6_3"
+    })
+  }
+}
+
+impl<'de> Deserialize<'de> for LayoutKind {
+  fn deserialize<D>(de: D) -> Result<Self, D::Error>
+  where D: Deserializer<'de>
+  {
+    let s: &str = <&str>::deserialize(de)?;
+    Ok(match s {
+      "LAYOUT_split_3x6_3" => LayoutKind::LayoutSplit3x6_3,
+      &_ => {
+        return Result::Err(D::Error::custom("invalid layout kind"));
+      }
+    })
+  }
+}
+
+pub struct Layout {
+  pub positions: Vec<(usize, usize), MAX_KEYS>,
+}
+
+pub fn get_layout(kind: LayoutKind) -> Layout {
+  match kind {
+    LayoutKind::LayoutSplit3x6_3 => {
+      let n_keys = 2*(3*6 + 3);
+      let pos = [
+        (0,0), (0,1), (0,2), (0,3), (0,4), (0,5), (4,0), (4,1), (4,2), (4,3), (4,4), (4,5),
+        (1,0), (1,1), (1,2), (1,3), (1,4), (1,5), (5,0), (5,1), (5,2), (5,3), (5,4), (5,5),
+        (2,0), (2,1), (2,2), (2,3), (2,4), (2,5), (6,0), (6,1), (6,2), (6,3), (6,4), (6,5),
+        (3,0), (3,1), (3,2), (7,0), (7,1), (7,2),
+      ];
+      assert_eq!(pos.len(), n_keys);
+      Layout {
+        positions: Vec::from_slice(&pos).unwrap()
+      }
+    }
+  }
 }
 
 fn make_layer_str(prefix: &str, layer: u32, layer_buf: &mut [u8]) -> Result<(), &'static str> {

@@ -4,6 +4,8 @@ use ehal::digital::v2::PinState;
 use crate::Error;
 use core::convert::Infallible;
 
+use crate::consts::*;
+
 pub trait TryIntoOutputPin {
   type Pin;
   fn try_into_output_pin(self) -> Result<Self::Pin, Error>;
@@ -13,11 +15,22 @@ pub trait TryIntoInputPin {
   fn try_into_input_pin(self) -> Result<Self::Pin, Error>;
 }
 
-const BUS_WIDTH: usize = 6;
-
 pub struct InputBus<P: InputPin>
 {
   pub pins: [P; BUS_WIDTH]
+}
+
+impl<P: InputPin<Error=Infallible>> InputBus<P> {
+  pub fn read(&self) -> RegValue {
+    let mut value: RegValue = 0;
+    for i in 0..BUS_WIDTH {
+      value <<= 1;
+      if self.pins[i].is_high().unwrap() {
+        value |= 1;
+      }
+    }
+    return value;
+  }
 }
 
 pub struct OutputBus<Q: OutputPin>
@@ -26,9 +39,15 @@ pub struct OutputBus<Q: OutputPin>
 }
 
 impl<Q: OutputPin<Error=Infallible>> OutputBus<Q> {
-  pub fn set_state(&mut self, state: [PinState; BUS_WIDTH]) -> () {
+  pub fn write(&mut self, state: RegValue) -> () {
     self.pins.iter_mut().enumerate().for_each(
-      |i_pin| i_pin.1.set_state(state[i_pin.0]).unwrap());
+      |i_pin| {
+        let (i, pin) = i_pin;
+        pin.set_state(match (state >> i) & 1 {
+          0 => PinState::Low,
+          _ => PinState::High,
+        }).unwrap();
+      });
   }
 }
 
