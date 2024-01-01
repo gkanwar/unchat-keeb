@@ -5,8 +5,7 @@ use core::convert::Infallible;
 
 use crate::board::RegMap;
 use crate::vkeyboard::KeyEvent;
-use crate::Error;
-use crate::consts::*;
+use crate::prelude::*;
 use crate::bus::InputBus;
 
 pub struct SwitchMatrix<Q: OutputPin> {

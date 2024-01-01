@@ -5,7 +5,7 @@ use core::result::Result;
 use heapless::Vec;
 use core::str;
 
-use crate::consts::*;
+use crate::prelude::*;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Keymap {

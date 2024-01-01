@@ -1,10 +1,9 @@
+use core::convert::Infallible;
 use ehal::digital::v2::OutputPin;
 use ehal::digital::v2::InputPin;
 use ehal::digital::v2::PinState;
-use crate::Error;
-use core::convert::Infallible;
 
-use crate::consts::*;
+use crate::prelude::*;
 
 pub trait TryIntoOutputPin {
   type Pin;

@@ -1,8 +1,7 @@
 use heapless::Vec;
 use core::result::Result;
 
-use crate::consts::*;
-use crate::Error;
+use crate::prelude::*;
 use crate::usb::UsbEvent;
 
 // Virtual keyboard state follows the QMK model:

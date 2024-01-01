@@ -8,16 +8,27 @@ use bsp::entry;
 use bsp::hal::{
   self,
   clocks::{init_clocks_and_plls, Clock},
-  pac,
+  pac::{self, interrupt},
   gpio,
   sio,
   watchdog
 };
-use cortex_m::delay;
+use cortex_m as cpu;
+use cortex_m::interrupt::Mutex;
 use ehal::digital::v2::{InputPin, OutputPin, PinState};
 
 use core::convert::Infallible;
 use core::panic::PanicInfo;
+use core::cell::Cell;
+
+use usb_device::{
+  prelude::*,
+  class_prelude::*,
+};
+use usbd_hid::{
+  hid_class,
+  descriptor::{generator_prelude::*, gen_hid_descriptor, AsInputReport},
+};
 
 use keeb::{
   Error,
@@ -148,8 +159,86 @@ fn into_user_pins(pins: bsp::Pins) -> UserPins {
   }
 }
 
+const USB_CLASS_HID: u8 = 3;
+const USB_POLL_MS: u8 = 1;
+// TODO: avoid duplication with report proc macro?
+const NKRO_MIN_KEY: usize = 0x02;
+const NKRO_MAX_KEY: usize = 0x81;
+
+#[gen_hid_descriptor(
+  (collection = APPLICATION, usage_page = GENERIC_DESKTOP, usage = KEYBOARD) = {
+    (usage_page = KEYBOARD, usage_min = 0xE0, usage_max = 0xE7) = {
+      #[packed_bits 8]
+      #[item_settings data,variable,absolute]
+      modifier = input;
+    };
+    (usage_min = 0x00, usage_max = 0xFF) = {
+      #[item_settings constant,variable,absolute]
+      reserved = input;
+    };
+    (usage_page = LEDS, usage_min = 0x01, usage_max = 0x05) = {
+      #[packed_bits 5]
+      #[item_settings data,variable,absolute]
+      leds = output;
+    };
+    (usage_page = KEYBOARD, usage_min = 0x00, usage_max = 0xDD) = {
+      #[item_settings data,array,absolute]
+      boot_keys = input;
+    };
+    (usage_page = KEYBOARD, usage_min = 0x02, usage_max = 0x81) = {
+      #[packed_bits 128]
+      #[item_settings data,variable,absolute]
+      nkro_keys = input;
+    };
+  }
+)]
+struct NKROBootKeyboardReport {
+  // fixed boot format report
+  pub modifier: u8,
+  pub reserved: u8,
+  pub leds: u8,
+  pub boot_keys: [u8; 6],
+  // nkro extension for USB-compatible OS
+  pub nkro_keys: [u8; 16],
+}
+
+
+type UsbBusAlloc = UsbBusAllocator<hal::usb::UsbBus>;
+type UsbDev<'a> = UsbDevice<'a, hal::usb::UsbBus>;
+type UsbKbdClass<'a> = hid_class::HIDClass<'a, hal::usb::UsbBus>;
+struct UsbInterface<'a> {
+  usb_dev: UsbDev<'a>,
+  usb_kbd_class: UsbKbdClass<'a>,
+}
+
+static mutex_usb_interface: Mutex<Cell<Option<UsbInterface>>>
+  = Mutex::new(Cell::new(None));
+
+#[allow(non_snake_case)]
+#[interrupt]
+unsafe fn USBCTRL_IRQ() {
+  cpu::interrupt::free(|cs| {
+    let mut usb_interface = Cell::new(None);
+    mutex_usb_interface.borrow(cs).swap(&usb_interface);
+    match usb_interface.get_mut() {
+      Some(UsbInterface{ usb_dev, usb_kbd_class, .. }) => {
+        usb_dev.poll(&mut [usb_kbd_class]);
+      },
+      _ => {}
+    }
+    mutex_usb_interface.borrow(cs).swap(&usb_interface);
+  });
+}
+
+// generic keyboard
+// https://github.com/obdev/v-usb/blob/master/usbdrv/USB-IDs-for-free.txt
+const USB_VID_PID_GEN_KBD: UsbVidPid = UsbVidPid(0x16c0, 0x27db);
+
 #[entry]
 fn rp2040_main() -> ! {
+  // usb bus must be static lifetime for interrupts
+  static mut USB_BUS: Option<UsbBusAlloc> = None;
+
   // init board state and components
   let mut pac = pac::Peripherals::take().unwrap();
   let core = pac::CorePeripherals::take().unwrap();
@@ -158,10 +247,10 @@ fn rp2040_main() -> ! {
 
   const XTAL_FREQ_HZ: u32 = 12_000_000_u32;
   let clocks = init_clocks_and_plls(
-    XTAL_FREQ_HZ, pac.XOSC, pac.CLOCKS, pac.PLL_SYS, pac.PLL_USB, &mut
-    pac.RESETS, &mut watchdog).ok().unwrap();
+    XTAL_FREQ_HZ, pac.XOSC, pac.CLOCKS, pac.PLL_SYS, pac.PLL_USB,
+    &mut pac.RESETS, &mut watchdog).ok().unwrap();
 
-  let mut delay = delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
+  let mut delay = cpu::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
   let pins = bsp::Pins::new(
     pac.IO_BANK0,
@@ -169,6 +258,39 @@ fn rp2040_main() -> ! {
     sio.gpio_bank0,
     &mut pac.RESETS,
   );
+
+  // set up USB
+  *USB_BUS = Some(UsbBusAllocator::new(hal::usb::UsbBus::new(
+    pac.USBCTRL_REGS, pac.USBCTRL_DPRAM, clocks.usb_clock, true, &mut pac.RESETS
+  )));
+  let usb_bus = USB_BUS.as_ref().unwrap();
+  let usb_kbd_class = hid_class::HIDClass::new_with_settings(
+    &usb_bus, NKROBootKeyboardReport::desc(), USB_POLL_MS,
+    hid_class::HidClassSettings {
+      subclass: hid_class::HidSubClass::NoSubClass,
+      protocol: hid_class::HidProtocol::Keyboard,
+      config: hid_class::ProtocolModeConfig::DefaultBehavior,
+      locale: hid_class::HidCountryCode::US,
+    });
+  let usb_dev =
+    UsbDeviceBuilder::new(&usb_bus, USB_VID_PID_GEN_KBD)
+    .manufacturer("gkanwar")
+    .product("Unchat-42")
+    .serial_number("XXXX")
+    .device_class(USB_CLASS_HID)
+    .build();
+  let usb_interface = Cell::new(Some(UsbInterface {
+    usb_dev, usb_kbd_class
+  }));
+
+  unsafe {
+    cpu::interrupt::free(|cs| {
+      mutex_usb_interface.borrow(cs).swap(&usb_interface);
+    });
+    pac::NVIC::unmask(pac::Interrupt::USBCTRL_IRQ);
+  }
+
+  
 
   // load keymap
   let (layout, _bytes_read): (Keymap, usize) =
@@ -187,7 +309,7 @@ fn rp2040_main() -> ! {
 
   // work around ownership semantics by clobbering user_pins
   for i in 0..board.bus_pins.len() {
-    let p = board.bus_pins[i];
+    let p = board.bus_pins[i] as usize;
     let idx = general_ids.iter().position(|&i| i == p).unwrap();
     general_pins.swap(idx, i);
     general_ids.swap(idx, i);
@@ -209,15 +331,71 @@ fn rp2040_main() -> ! {
   };
   let mut out_bus = in_bus.into_output_bus();
 
+  // FORNOW:
+  // while usb_dev.state() != UsbDeviceState::Configured {
+  //   delay.delay_ms(5);
+  //   usb_dev.poll(&mut [&mut usb_kbd_class]);
+  // }
+  delay.delay_ms(1000);
+  let mut key_down = false;
+  let mut i: usize = 0;
+  let mut buf: [u8; 64] = [0; 64];
   loop {
-    out_bus.set_state([
-      PinState::Low,
-      PinState::High,
-      PinState::High,
-      PinState::Low,
-      PinState::Low,
-      PinState::High
-    ]);
+    delay.delay_us(5000);
+    i += 1;
+    key_down = i < 2000 && (i % 200) < 60 && (i % 200) > 10;
+    if key_down {
+      led_pin.set_high().unwrap();
+    }
+    else {
+      led_pin.set_low().unwrap();
+    }
+    // if !usb_dev.poll(&mut [&mut usb_kbd_class]) {
+    //   continue;
+    // }
+
+    let mut report = NKROBootKeyboardReport {
+      modifier: 0, reserved: 0, leds: 0,
+      boot_keys: [0; 6],
+      nkro_keys: [0; 16],
+    };
+    if key_down {
+      let key: usize = 0x06;
+      report.boot_keys[0] = key as u8;
+      let byte = ((key - NKRO_MIN_KEY) / 8) as u8;
+      let bit = ((key - NKRO_MIN_KEY) % 8) as u8;
+      report.nkro_keys[byte as usize] |= 1 << bit;
+    }
+    cpu::interrupt::free(|cs| {
+      let mut usb_interface = Cell::new(None);
+      mutex_usb_interface.borrow(cs).swap(&usb_interface);
+      let configured = match usb_interface.get_mut() {
+        Some(UsbInterface{ usb_dev, .. }) => usb_dev.state() == UsbDeviceState::Configured,
+        None => false,
+      };
+      if configured {
+        match usb_interface.get_mut() {
+          Some(UsbInterface{ usb_kbd_class, .. }) => {
+            match usb_kbd_class.pull_raw_output(&mut buf) {
+              Ok(size) => {},
+              Err(UsbError::WouldBlock) => {}, // no data
+              Err(err) => panic!("unexpected read error"),
+            }
+            match usb_kbd_class.push_input(&report) {
+              Ok(size) => {},
+              Err(UsbError::WouldBlock) => {}, // buffer full
+              Err(err) => panic!("unexpected write error"),
+            }
+          },
+          None => {},
+        }
+      }
+      mutex_usb_interface.borrow(cs).swap(&usb_interface);
+    });
+  }
+
+  loop {
+    out_bus.write(0b011001);
     led_pin.set_high().unwrap();
     delay.delay_ms(200);
 

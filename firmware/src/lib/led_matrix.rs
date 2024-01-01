@@ -3,7 +3,7 @@ use heapless::Vec;
 
 use crate::board::RegMap;
 use crate::bus::OutputBus;
-use crate::consts::*;
+use crate::prelude::*;
 
 pub struct LedMatrix<Q: OutputPin> {
   reg_map: RegMap, // TODO: is this the right information to hang on to?

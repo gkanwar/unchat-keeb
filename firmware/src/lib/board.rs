@@ -6,7 +6,7 @@ use heapless::Vec;
 use core::str;
 
 use crate::layout::Layout;
-use crate::consts::*;
+use crate::prelude::*;
 
 type VMatrix<T> = Vec<Vec<T, MAX_COLS>, MAX_ROWS>;
 type Matrix<T> = [[T; MAX_COLS]; MAX_ROWS];

@@ -1,8 +1,8 @@
 #![cfg_attr(not(test), no_std)]
 
+use core::convert::Infallible;
 use ehal::blocking::delay::DelayUs;
 use ehal::digital::v2::{InputPin, OutputPin};
-use core::convert::Infallible;
 
 pub mod layout;
 pub mod bus;
@@ -12,12 +12,11 @@ pub mod led_matrix;
 pub mod vkeyboard;
 pub mod usb;
 
-// re-export all error types
 pub mod error;
-pub use error::*;
+// re-export all error types
+pub use crate::error::*;
 
-// global consts and type aliases
-pub mod consts {
+pub mod prelude {
   pub const BUS_WIDTH: usize = 6;
   
   pub const MAX_KEYS: usize = 128;
@@ -36,8 +35,11 @@ pub mod consts {
   pub type PinIndex = u8;
 
   pub const MAX_EVENTS: usize = 16;
+  
+  // re-export all error types
+  pub use crate::error::*;
 }
-use consts::*;
+use prelude::*;
 
 
 use bus::{TryIntoOutputPin, TryIntoInputPin};

@@ -1,7 +1,7 @@
 use heapless::Vec;
 
 use crate::Error;
-use crate::consts::*;
+use crate::prelude::*;
 
 pub struct Usb {
 
