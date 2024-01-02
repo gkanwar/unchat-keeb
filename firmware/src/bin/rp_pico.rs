@@ -338,13 +338,11 @@ fn rp2040_main() -> ! {
   // }
   delay.delay_ms(1000);
   let mut key_down = false;
-  let mut i: usize = 0;
   let mut buf: [u8; 64] = [0; 64];
-  loop {
-    delay.delay_us(5000);
-    i += 1;
-    key_down = i < 2000 && (i % 200) < 60 && (i % 200) > 10;
-    if key_down {
+  for i in 0..10000 {
+    delay.delay_ms(1);
+    let new_key_down = i < 10000 && (i % 1000) < 300 && (i % 1000) > 50;
+    if new_key_down {
       led_pin.set_high().unwrap();
     }
     else {
@@ -354,6 +352,12 @@ fn rp2040_main() -> ! {
     //   continue;
     // }
 
+    // only generate report if something changed
+    if new_key_down == key_down {
+      continue;
+    }
+    key_down = new_key_down;
+    
     let mut report = NKROBootKeyboardReport {
       modifier: 0, reserved: 0, leds: 0,
       boot_keys: [0; 6],
@@ -394,14 +398,19 @@ fn rp2040_main() -> ! {
     });
   }
 
-  loop {
-    out_bus.write(0b011001);
-    led_pin.set_high().unwrap();
-    delay.delay_ms(200);
+  // pause, then reboot into BOOTSEL
+  delay.delay_ms(1000);
+  hal::rom_data::reset_to_usb_boot(0, 0);
+  unreachable!();
 
-    in_bus = out_bus.into_input_bus();
-    led_pin.set_low().unwrap();
-    delay.delay_ms(800);
-    out_bus = in_bus.into_output_bus();
-  }
+  // loop {
+  //   out_bus.write(0b011001);
+  //   led_pin.set_high().unwrap();
+  //   delay.delay_ms(200);
+
+  //   in_bus = out_bus.into_input_bus();
+  //   led_pin.set_low().unwrap();
+  //   delay.delay_ms(800);
+  //   out_bus = in_bus.into_output_bus();
+  // }
 }
