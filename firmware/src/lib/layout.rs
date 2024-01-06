@@ -10,7 +10,7 @@ use crate::prelude::*;
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Keymap {
   layout: LayoutKind,
-  layers: Vec<Vec<Behavior, MAX_KEYS>, MAX_LAYERS>,
+  pub layers: Vec<Vec<Behavior, MAX_KEYS>, MAX_LAYERS>,
 }
 
 #[derive(Debug)]
@@ -64,7 +64,10 @@ pub fn get_layout(kind: LayoutKind) -> Layout {
   }
 }
 
-fn make_layer_str(prefix: &str, layer: u32, layer_buf: &mut [u8]) -> Result<(), &'static str> {
+fn make_layer_str(
+  prefix: &str, layer: LayerIndex, layer_buf: &mut [u8])
+  -> Result<(), &'static str>
+{
   if prefix.len() != 2 {
     return Result::Err("invalid layer prefix");
   }
@@ -72,7 +75,7 @@ fn make_layer_str(prefix: &str, layer: u32, layer_buf: &mut [u8]) -> Result<(), 
   layer_buf[1] = prefix.bytes().nth(1).ok_or("invalid prefix")?;
   // NOTE: panics on encoding problem
   '('.encode_utf8(&mut layer_buf[2..3]);
-  char::from_digit(layer, 10).ok_or("invalid layer")?
+  char::from_digit(layer as u32, 10).ok_or("invalid layer")?
     .encode_utf8(&mut layer_buf[3..4]);
   ')'.encode_utf8(&mut layer_buf[4..5]);
   return Ok(());
@@ -80,13 +83,13 @@ fn make_layer_str(prefix: &str, layer: u32, layer_buf: &mut [u8]) -> Result<(), 
 
 macro_rules! make_behavior_enum {
   ( $(($variant:ident, $label:literal)),* $(,)? ) => {
-    #[derive(Debug)]
+    #[derive(Debug,Copy,Clone)]
     pub enum Behavior {
       $($variant),* ,
-      LayerGoto(u32),
-      LayerMod(u32),
-      LayerToggle(u32),
-      LayerTapToggle(u32),
+      LayerGoto(LayerIndex),
+      LayerMod(LayerIndex),
+      LayerToggle(LayerIndex),
+      LayerTapToggle(LayerIndex),
     }
     impl Serialize for Behavior {
       fn serialize<S>(&self, ser: S) -> Result<S::Ok, S::Error>
@@ -120,22 +123,22 @@ macro_rules! make_behavior_enum {
       {
         let s: &str = <&str>::deserialize(de)?;
         if s.starts_with("TO(") && s.ends_with(")") {
-          let i: u32 = s[3..s.len()-1].parse::<u32>()
+          let i: LayerIndex = s[3..s.len()-1].parse::<LayerIndex>()
             .map_err(D::Error::custom)?;
           return Ok(Behavior::LayerGoto(i));
         }
         if s.starts_with("MO(") && s.ends_with(")") {
-          let i: u32 = s[3..s.len()-1].parse::<u32>()
+          let i: LayerIndex = s[3..s.len()-1].parse::<LayerIndex>()
             .map_err(D::Error::custom)?;
           return Ok(Behavior::LayerMod(i));
         }
         if s.starts_with("TG(") && s.ends_with(")") {
-          let i: u32 = s[3..s.len()-1].parse::<u32>()
+          let i: LayerIndex = s[3..s.len()-1].parse::<LayerIndex>()
             .map_err(D::Error::custom)?;
           return Ok(Behavior::LayerToggle(i));
         }
         if s.starts_with("TT(") && s.ends_with(")") {
-          let i: u32 = s[3..s.len()-1].parse::<u32>()
+          let i: LayerIndex = s[3..s.len()-1].parse::<LayerIndex>()
             .map_err(D::Error::custom)?;
           return Ok(Behavior::LayerTapToggle(i));
         }
@@ -152,6 +155,7 @@ macro_rules! make_behavior_enum {
 
 make_behavior_enum!(
   // special keys
+  (Enter, "KC_ENT"),
   (Tab, "KC_TAB"),
   (Space, "KC_SPC"),
   (Backspace, "KC_BSPC"),

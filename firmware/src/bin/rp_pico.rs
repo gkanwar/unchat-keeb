@@ -31,10 +31,12 @@ use usbd_hid::{
 };
 
 use keeb::{
+  prelude::*,
   Error,
   layout::{Keymap},
   board::{Board},
-  bus::{TryIntoInputPin, TryIntoOutputPin}
+  bus::{TryIntoInputPin, TryIntoOutputPin},
+  usb::NKROBootKeyboardReport,
 };
 
 #[panic_handler]
@@ -159,50 +161,6 @@ fn into_user_pins(pins: bsp::Pins) -> UserPins {
   }
 }
 
-const USB_CLASS_HID: u8 = 3;
-const USB_POLL_MS: u8 = 1;
-// TODO: avoid duplication with report proc macro?
-const NKRO_MIN_KEY: usize = 0x02;
-const NKRO_MAX_KEY: usize = 0x81;
-
-#[gen_hid_descriptor(
-  (collection = APPLICATION, usage_page = GENERIC_DESKTOP, usage = KEYBOARD) = {
-    (usage_page = KEYBOARD, usage_min = 0xE0, usage_max = 0xE7) = {
-      #[packed_bits 8]
-      #[item_settings data,variable,absolute]
-      modifier = input;
-    };
-    (usage_min = 0x00, usage_max = 0xFF) = {
-      #[item_settings constant,variable,absolute]
-      reserved = input;
-    };
-    (usage_page = LEDS, usage_min = 0x01, usage_max = 0x05) = {
-      #[packed_bits 5]
-      #[item_settings data,variable,absolute]
-      leds = output;
-    };
-    (usage_page = KEYBOARD, usage_min = 0x00, usage_max = 0xDD) = {
-      #[item_settings data,array,absolute]
-      boot_keys = input;
-    };
-    (usage_page = KEYBOARD, usage_min = 0x02, usage_max = 0x81) = {
-      #[packed_bits 128]
-      #[item_settings data,variable,absolute]
-      nkro_keys = input;
-    };
-  }
-)]
-struct NKROBootKeyboardReport {
-  // fixed boot format report
-  pub modifier: u8,
-  pub reserved: u8,
-  pub leds: u8,
-  pub boot_keys: [u8; 6],
-  // nkro extension for USB-compatible OS
-  pub nkro_keys: [u8; 16],
-}
-
-
 type UsbBusAlloc = UsbBusAllocator<hal::usb::UsbBus>;
 type UsbDev<'a> = UsbDevice<'a, hal::usb::UsbBus>;
 type UsbKbdClass<'a> = hid_class::HIDClass<'a, hal::usb::UsbBus>;
@@ -265,7 +223,7 @@ fn rp2040_main() -> ! {
   )));
   let usb_bus = USB_BUS.as_ref().unwrap();
   let usb_kbd_class = hid_class::HIDClass::new_with_settings(
-    &usb_bus, NKROBootKeyboardReport::desc(), USB_POLL_MS,
+    &usb_bus, NKROBootKeyboardReport::desc(), 0,
     hid_class::HidClassSettings {
       subclass: hid_class::HidSubClass::NoSubClass,
       protocol: hid_class::HidProtocol::Keyboard,
@@ -364,10 +322,10 @@ fn rp2040_main() -> ! {
       nkro_keys: [0; 16],
     };
     if key_down {
-      let key: usize = 0x06;
-      report.boot_keys[0] = key as u8;
-      let byte = ((key - NKRO_MIN_KEY) / 8) as u8;
-      let bit = ((key - NKRO_MIN_KEY) % 8) as u8;
+      let key: u8 = 0x06;
+      report.boot_keys[0] = key;
+      let byte = (key - NKRO_MIN_KEY) / 8;
+      let bit = (key - NKRO_MIN_KEY) % 8;
       report.nkro_keys[byte as usize] |= 1 << bit;
     }
     cpu::interrupt::free(|cs| {

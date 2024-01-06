@@ -21,7 +21,8 @@ pub mod prelude {
   
   pub const MAX_KEYS: usize = 128;
   pub const MAX_LAYERS: usize = 8;
-  pub type KeyMask = (u64, u64);
+  pub const KEY_MASK_LEN: usize = MAX_KEYS / 64;
+  pub type KeyMask = [u64; KEY_MASK_LEN];
   pub type KeyIndex = u8;
   pub type LayerMask = u8;
   pub type LayerIndex = u8;
@@ -34,7 +35,15 @@ pub mod prelude {
   pub type RegValue = u8;
   pub type PinIndex = u8;
 
+  pub type KeyUsageMask = [u8; 16];
+
   pub const MAX_EVENTS: usize = 16;
+
+  pub const USB_CLASS_HID: u8 = 3;
+  pub const NKRO_MIN_KEY: u8 = 0x02;
+  pub const NKRO_MAX_KEY: u8 = 0x81;
+  pub const MIN_MODIFIER: u8 = 0xe0;
+  pub const MAX_MODIFIER: u8 = 0xe7;
   
   // re-export all error types
   pub use crate::error::*;
@@ -59,10 +68,13 @@ where
   let mut out_bus = bus.into_output_bus();
   leds.tick(&mut out_bus);
   let in_bus = out_bus.into_input_bus();
+  let mut updated = false;
   for i in 0..switches.num_regs() {
     let key_events = switches.subtick(i as RegIndex, &in_bus, delay)?;
-    let usb_events = vkbd.update(key_events)?;
-    usb.send(usb_events)?;
+    updated = updated || vkbd.update(key_events)?;
+  }
+  if updated {
+    usb.send(vkbd)?;
   }
   return Ok(in_bus);
 }
