@@ -302,6 +302,100 @@ fn rp2040_main() -> ! {
     serde_json::from_slice(include_bytes!("../../boards/unchat-42.json"))
     .unwrap();
 
+  // FORNOW:
+  let mut led_pin = pins.led.into_push_pull_output();
+  let mut led_rst_pin = pins.gpio27.into_push_pull_output();
+  let mut led_dim_pin = pins.gpio26.into_push_pull_output();
+  let mut led_clk1_pin = pins.gpio7.into_push_pull_output();
+  let mut switch1_en_pin = pins.gpio6.into_push_pull_output();
+  led_rst_pin.set_high().unwrap();
+  switch1_en_pin.set_high().unwrap();
+  delay.delay_us(1);
+  let mut bus1_pin = pins.gpio0.into_push_pull_output();
+  let mut bus2_pin = pins.gpio1.into_push_pull_output();
+  let mut bus3_pin = pins.gpio2.into_push_pull_output();
+  let mut bus4_pin = pins.gpio3.into_push_pull_output();
+  let mut bus5_pin = pins.gpio4.into_push_pull_output();
+  let mut bus6_pin = pins.gpio5.into_push_pull_output();
+  bus1_pin.set_low().unwrap();
+  bus2_pin.set_low().unwrap();
+  bus3_pin.set_low().unwrap();
+  bus4_pin.set_low().unwrap();
+  bus5_pin.set_low().unwrap();
+  bus6_pin.set_low().unwrap();
+  let mut values: [bool; 6] = [false; 6];
+  loop {
+    led_pin.set_high().unwrap();
+    let bus1_in_pin = bus1_pin.into_pull_down_input();
+    let bus2_in_pin = bus2_pin.into_pull_down_input();
+    let bus3_in_pin = bus3_pin.into_pull_down_input();
+    let bus4_in_pin = bus4_pin.into_pull_down_input();
+    let bus5_in_pin = bus5_pin.into_pull_down_input();
+    let bus6_in_pin = bus6_pin.into_pull_down_input();
+    delay.delay_us(1);
+    switch1_en_pin.set_low().unwrap();
+    delay.delay_us(1);
+    values[2] = bus1_in_pin.is_high().unwrap();
+    values[1] = bus2_in_pin.is_high().unwrap();
+    values[0] = bus3_in_pin.is_high().unwrap();
+    values[5] = bus4_in_pin.is_high().unwrap();
+    values[4] = bus5_in_pin.is_high().unwrap();
+    values[3] = bus6_in_pin.is_high().unwrap();
+    switch1_en_pin.set_high().unwrap();
+    delay.delay_us(1);
+    bus1_pin = bus1_in_pin.into_push_pull_output();
+    bus2_pin = bus2_in_pin.into_push_pull_output();
+    bus3_pin = bus3_in_pin.into_push_pull_output();
+    bus4_pin = bus4_in_pin.into_push_pull_output();
+    bus5_pin = bus5_in_pin.into_push_pull_output();
+    bus6_pin = bus6_in_pin.into_push_pull_output();
+    bus1_pin.set_state(values[0].into()).unwrap();
+    bus2_pin.set_state(values[1].into()).unwrap();
+    bus3_pin.set_state(values[2].into()).unwrap();
+    bus4_pin.set_state(values[3].into()).unwrap();
+    bus5_pin.set_state(values[4].into()).unwrap();
+    bus6_pin.set_state(values[5].into()).unwrap();
+    led_clk1_pin.set_high().unwrap();
+    delay.delay_us(1);
+    led_clk1_pin.set_low().unwrap();
+    delay.delay_ms(10);
+    // TEST: Simple LED loop
+    /*
+    for i in 0..6 {
+      match i {
+        0 => bus1_pin.set_high().unwrap(),
+        1 => bus2_pin.set_high().unwrap(),
+        2 => bus3_pin.set_high().unwrap(),
+        3 => bus4_pin.set_high().unwrap(),
+        4 => bus5_pin.set_high().unwrap(),
+        5 => bus6_pin.set_high().unwrap(),
+        _ => {}
+      }
+      delay.delay_ms(1);
+      // out_bus.write(0b011001);
+      led_pin.set_high().unwrap();
+      led_clk1_pin.set_high().unwrap();
+      delay.delay_ms(39);
+
+      match i {
+        0 => bus1_pin.set_low().unwrap(),
+        1 => bus2_pin.set_low().unwrap(),
+        2 => bus3_pin.set_low().unwrap(),
+        3 => bus4_pin.set_low().unwrap(),
+        4 => bus5_pin.set_low().unwrap(),
+        5 => bus6_pin.set_low().unwrap(),
+        _ => {}
+      }
+      delay.delay_ms(1);
+      // in_bus = out_bus.into_input_bus();
+      led_pin.set_low().unwrap();
+      led_clk1_pin.set_low().unwrap();
+      delay.delay_ms(159);
+      // out_bus = in_bus.into_output_bus();
+    }
+    */
+  }
+
   let user_pins = into_user_pins(pins);
   let mut led_pin = user_pins.led;
   let mut general_pins = user_pins.general_pins;
@@ -329,7 +423,7 @@ fn rp2040_main() -> ! {
       it.next().unwrap(),
     ]
   };
-  let mut out_bus = in_bus.into_output_bus();
+  let mut out_bus = in_bus.into_output_bus();  
 
   // FORNOW:
   // while usb_dev.state() != UsbDeviceState::Configured {
@@ -402,15 +496,4 @@ fn rp2040_main() -> ! {
   delay.delay_ms(1000);
   hal::rom_data::reset_to_usb_boot(0, 0);
   unreachable!();
-
-  // loop {
-  //   out_bus.write(0b011001);
-  //   led_pin.set_high().unwrap();
-  //   delay.delay_ms(200);
-
-  //   in_bus = out_bus.into_input_bus();
-  //   led_pin.set_low().unwrap();
-  //   delay.delay_ms(800);
-  //   out_bus = in_bus.into_output_bus();
-  // }
 }
