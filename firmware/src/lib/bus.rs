@@ -1,7 +1,5 @@
 use core::convert::Infallible;
-use ehal::digital::v2::OutputPin;
-use ehal::digital::v2::InputPin;
-use ehal::digital::v2::PinState;
+use ehal::digital::v2::{InputPin, OutputPin, PinState};
 
 use crate::prelude::*;
 

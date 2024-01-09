@@ -20,14 +20,14 @@ use ehal::digital::v2::{InputPin, OutputPin, PinState};
 use core::convert::Infallible;
 use core::panic::PanicInfo;
 use core::cell::Cell;
+use heapless::Vec;
 
 use usb_device::{
   prelude::*,
   class_prelude::*,
 };
 use usbd_hid::{
-  hid_class,
-  descriptor::{generator_prelude::*, gen_hid_descriptor, AsInputReport},
+  hid_class, descriptor::generator_prelude::*
 };
 
 use keeb::{
@@ -37,6 +37,9 @@ use keeb::{
   board::{Board},
   bus::{TryIntoInputPin, TryIntoOutputPin},
   usb::NKROBootKeyboardReport,
+  switch_matrix::SwitchMatrix,
+  led_matrix::LedMatrix,
+  vkeyboard::VKeyboard,
 };
 
 #[panic_handler]
@@ -118,8 +121,8 @@ impl TryIntoInputPin for GpioOut {
 
 struct UserPins {
   led: GpioOut,
-  general_pins: [GpioIn; 26],
-  general_ids: [usize; 26],
+  general_pins: Vec<GpioIn, 32>,
+  general_ids: Vec<usize, 32>,
 }
 
 fn into_user_pins(pins: bsp::Pins) -> UserPins {
@@ -152,12 +155,12 @@ fn into_user_pins(pins: bsp::Pins) -> UserPins {
       GpioIn::new(pins.gpio26),
       GpioIn::new(pins.gpio27),
       GpioIn::new(pins.gpio28),
-    ],
+    ].into_iter().collect(),
     general_ids: [
       0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
       11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
       21, 22, 26, 27, 28
-    ],
+    ].into_iter().collect(),
   }
 }
 
@@ -202,14 +205,11 @@ fn rp2040_main() -> ! {
   let core = pac::CorePeripherals::take().unwrap();
   let mut watchdog = watchdog::Watchdog::new(pac.WATCHDOG);
   let sio = sio::Sio::new(pac.SIO);
-
   const XTAL_FREQ_HZ: u32 = 12_000_000_u32;
   let clocks = init_clocks_and_plls(
     XTAL_FREQ_HZ, pac.XOSC, pac.CLOCKS, pac.PLL_SYS, pac.PLL_USB,
     &mut pac.RESETS, &mut watchdog).ok().unwrap();
-
   let mut delay = cpu::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
-
   let pins = bsp::Pins::new(
     pac.IO_BANK0,
     pac.PADS_BANK0,
@@ -240,7 +240,7 @@ fn rp2040_main() -> ! {
   let usb_interface = Cell::new(Some(UsbInterface {
     usb_dev, usb_kbd_class
   }));
-
+  // USB interrupts
   unsafe {
     cpu::interrupt::free(|cs| {
       mutex_usb_interface.borrow(cs).swap(&usb_interface);
@@ -248,12 +248,12 @@ fn rp2040_main() -> ! {
     pac::NVIC::unmask(pac::Interrupt::USBCTRL_IRQ);
   }
 
-  
 
   // load keymap
-  let (layout, _bytes_read): (Keymap, usize) =
+  let (keymap, _bytes_read): (Keymap, usize) =
     serde_json::from_slice(include_bytes!("../../keymaps/split-42-colemak.json"))
     .unwrap();
+  let layout = keeb::layout::get_layout(keymap.layout);
 
   // load board
   let (board, _bytes_read): (Board, usize) =
@@ -265,72 +265,39 @@ fn rp2040_main() -> ! {
   let mut general_pins = user_pins.general_pins;
   let mut general_ids = user_pins.general_ids;
 
-  // work around ownership semantics by clobbering user_pins
-  for i in 0..board.bus_pins.len() {
-    let p = board.bus_pins[i] as usize;
-    let idx = general_ids.iter().position(|&i| i == p).unwrap();
-    general_pins.swap(idx, i);
-    general_ids.swap(idx, i);
-  }
-  // let (bus_pins, general_pins) = general_pins.split_at(6);
-  // let (_, general_ids) = general_ids.split_at(6);
+  let board_pins =
+    keeb::board::split_pins(general_pins, general_ids, &board).unwrap();
+  let (mut in_bus, mut bus_lock) =
+    keeb::bus::make_bus(board_pins.bus_pins);
 
-  let mut it = general_pins.into_iter();
+  let reg_map = keeb::board::make_reg_map(&board, &layout);
+  let mut switches = SwitchMatrix::<GpioOut>::new(
+    reg_map.clone(), board_pins.switch_reg_pins).unwrap();
+  let mut leds = LedMatrix::<GpioOut>::new(
+    reg_map,
+    board_pins.backlight_reg_pins,
+    board_pins.backlight_reset_pin,
+    board_pins.backlight_dim_pin);
+  let mut vkbd = VKeyboard::new(keymap).unwrap();
 
-  let (in_bus, bus_lock) = keeb::bus::make_bus([
-    it.next().unwrap(),
-    it.next().unwrap(),
-    it.next().unwrap(),
-    it.next().unwrap(),
-    it.next().unwrap(),
-    it.next().unwrap(),
-  ]);
-  let mut out_bus = in_bus.into_output_bus(bus_lock);
-
-  // FORNOW:
-  // while usb_dev.state() != UsbDeviceState::Configured {
-  //   delay.delay_ms(5);
-  //   usb_dev.poll(&mut [&mut usb_kbd_class]);
-  // }
-  delay.delay_ms(1000);
-  let mut key_down = false;
-  let mut buf: [u8; 64] = [0; 64];
-  for i in 0..10000 {
-    delay.delay_ms(1);
-    let new_key_down = i < 10000 && (i % 1000) < 300 && (i % 1000) > 50;
-    if new_key_down {
-      led_pin.set_high().unwrap();
-    }
-    else {
-      led_pin.set_low().unwrap();
-    }
-    // if !usb_dev.poll(&mut [&mut usb_kbd_class]) {
-    //   continue;
-    // }
-
-    // only generate report if something changed
-    if new_key_down == key_down {
+  let mut buf: [u8; 64] = [0; 64]; // for usb OUT packets
+  loop {
+    delay.delay_ms(1000);
+    let (updated, new_in_bus, new_bus_lock) = keeb::tick(
+      in_bus, bus_lock, &mut switches, &mut leds, &mut vkbd, &mut delay
+    ).unwrap();
+    in_bus = new_in_bus;
+    bus_lock = new_bus_lock;
+    if !updated {
       continue;
     }
-    key_down = new_key_down;
-    
-    let mut report = NKROBootKeyboardReport {
-      modifier: 0, reserved: 0, leds: 0,
-      boot_keys: [0; 6],
-      nkro_keys: [0; 16],
-    };
-    if key_down {
-      let key: u8 = 0x06;
-      report.boot_keys[0] = key;
-      let byte = (key - NKRO_MIN_KEY) / 8;
-      let bit = (key - NKRO_MIN_KEY) % 8;
-      report.nkro_keys[byte as usize] |= 1 << bit;
-    }
+    let report = vkbd.get_report();
     cpu::interrupt::free(|cs| {
       let mut usb_interface = Cell::new(None);
       mutex_usb_interface.borrow(cs).swap(&usb_interface);
       let configured = match usb_interface.get_mut() {
-        Some(UsbInterface{ usb_dev, .. }) => usb_dev.state() == UsbDeviceState::Configured,
+        Some(UsbInterface{ usb_dev, .. }) =>
+          usb_dev.state() == UsbDeviceState::Configured,
         None => false,
       };
       if configured {
@@ -341,7 +308,7 @@ fn rp2040_main() -> ! {
               Err(UsbError::WouldBlock) => {}, // no data
               Err(err) => panic!("unexpected read error"),
             }
-            match usb_kbd_class.push_input(&report) {
+            match usb_kbd_class.push_input(report) {
               Ok(size) => {},
               Err(UsbError::WouldBlock) => {}, // buffer full
               Err(err) => panic!("unexpected write error"),
@@ -358,15 +325,4 @@ fn rp2040_main() -> ! {
   delay.delay_ms(1000);
   hal::rom_data::reset_to_usb_boot(0, 0);
   unreachable!();
-
-  // loop {
-  //   out_bus.write(0b011001);
-  //   led_pin.set_high().unwrap();
-  //   delay.delay_ms(200);
-
-  //   in_bus = out_bus.into_input_bus();
-  //   led_pin.set_low().unwrap();
-  //   delay.delay_ms(800);
-  //   out_bus = in_bus.into_output_bus();
-  // }
 }

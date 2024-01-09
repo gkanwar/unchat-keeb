@@ -5,19 +5,16 @@ use crate::Error;
 use crate::prelude::*;
 use crate::vkeyboard::VKeyboard;
 
-pub struct Usb {
+// Usb I/O is handled in the board-specific shell
+// pub struct Usb {
+// }
 
-}
+// impl Usb {
+//   pub fn send(&mut self, report: &NKROBootKeyboardReport) -> Result<(), Error> {
+//     todo!("usb protocol");
+//   }
+// }
 
-impl Usb {
-  pub fn send(&mut self, vkbd: &VKeyboard) -> Result<(), Error> {
-    todo!("usb protocol");
-  }
-}
-
-pub struct UsbEvent {
-  
-}
 
 // from usbd_hid v0.7.0
 // in the future, we can replace this with

@@ -2,7 +2,7 @@ use heapless::Vec;
 use core::result::Result;
 
 use crate::prelude::*;
-use crate::usb::{UsbEvent, KeyUsageAndIndex, NKROBootKeyboardReport, KeyboardUsage};
+use crate::usb::{KeyUsageAndIndex, NKROBootKeyboardReport, KeyboardUsage};
 use crate::layout::{Behavior, Keymap};
 
 // Virtual keyboard state follows the QMK model:
@@ -278,6 +278,10 @@ impl VKeyboard {
       };
     }
     Ok(updated)
+  }
+
+  pub fn get_report<'a>(&'a self) -> &'a NKROBootKeyboardReport {
+    &self.logical_state
   }
 }
 

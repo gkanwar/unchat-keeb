@@ -44,8 +44,8 @@ impl<Q: OutputPin> SwitchMatrix<Q> {
     let old_state = self.reg_state[i_reg as usize];
     let mut events = Vec::<KeyEvent, BUS_WIDTH>::new();
 
+    // guarded by bus lock
     self.reg_en_pins[i_reg as usize].set_low(); // enable
-    delay.delay_us(3);
     let new_state = bus.read();
     self.reg_en_pins[i_reg as usize].set_high(); // disable
 

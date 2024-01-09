@@ -5,7 +5,10 @@ use core::result::Result;
 use heapless::Vec;
 use core::str;
 
+use ehal::digital::v2::{InputPin, OutputPin};
+
 use crate::layout::Layout;
+use crate::bus::TryIntoOutputPin;
 use crate::prelude::*;
 
 type VMatrix<T> = Vec<Vec<T, MAX_COLS>, MAX_ROWS>;
@@ -23,6 +26,70 @@ pub struct Board {
   pub led_ind_pins: [PinIndex; 2],
 }
 
+pub struct BoardPins<P: InputPin, Q: OutputPin> {
+  pub bus_pins: [P; BUS_WIDTH],
+  pub switch_reg_pins: Vec<Q, MAX_REGS>,
+  pub backlight_reg_pins: Vec<Q, MAX_REGS>,
+  pub backlight_dim_pin: Q,
+  pub backlight_reset_pin: Q,
+  pub led_ind_pins: [Q; 2],
+}
+pub fn split_pins<P: InputPin, Q: OutputPin, const N: usize>(
+  mut pins: Vec<P, N>, mut ids: Vec<usize, N>, board: &Board
+) -> Result<BoardPins<P, Q>, Error>
+where P: TryIntoOutputPin<Pin=Q>
+{
+  let bus_pins: [P; BUS_WIDTH] =
+    board.bus_pins.iter().map(|p| {
+      let idx = ids.iter().position(|&i| i == *p as usize)
+        .ok_or(Error::PinConfigError)?;
+      ids.swap_remove(idx);
+      Ok(pins.swap_remove(idx))
+    }).collect::<Result<Vec<P, BUS_WIDTH>, Error>>()?
+    .into_array().map_err(|_| Error::PinConfigError)?;
+  let switch_reg_pins: Vec<Q, MAX_REGS> =
+    board.switch_reg_pins.iter().map(|p| {
+      let idx = ids.iter().position(|&i| i == *p as usize)
+        .ok_or(Error::PinConfigError)?;
+      ids.swap_remove(idx);
+      Ok(pins.swap_remove(idx).try_into_output_pin()?)
+    }).collect::<Result<Vec<Q, MAX_REGS>, Error>>()?;
+  let backlight_reg_pins: Vec<Q, MAX_REGS> =
+    board.backlight_reg_pins.iter().map(|p| {
+      let idx = ids.iter().position(|&i| i == *p as usize)
+        .ok_or(Error::PinConfigError)?;
+      ids.swap_remove(idx);
+      Ok(pins.swap_remove(idx).try_into_output_pin()?)
+    }).collect::<Result<Vec<Q, MAX_REGS>, Error>>()?;
+  let backlight_dim_pin = {
+    let p = &board.backlight_dim_pin;
+    let idx = ids.iter().position(|&i| i == *p as usize)
+      .ok_or(Error::PinConfigError)?;
+    ids.swap_remove(idx);
+    Ok(pins.swap_remove(idx).try_into_output_pin()?)
+  }?;
+  let backlight_reset_pin = {
+    let p = &board.backlight_reset_pin;
+    let idx = ids.iter().position(|&i| i == *p as usize)
+      .ok_or(Error::PinConfigError)?;
+    ids.swap_remove(idx);
+    Ok(pins.swap_remove(idx).try_into_output_pin()?)
+  }?;
+  let led_ind_pins: [Q; 2] =
+    board.led_ind_pins.iter().map(|p| {
+      let idx = ids.iter().position(|&i| i == *p as usize)
+        .ok_or(Error::PinConfigError)?;
+      ids.swap_remove(idx);
+      Ok(pins.swap_remove(idx).try_into_output_pin()?)
+    }).collect::<Result<Vec<Q, 2>, Error>>()?
+    .into_array().map_err(|_| Error::PinConfigError)?;
+  Ok(BoardPins {
+    bus_pins, switch_reg_pins, backlight_reg_pins, backlight_dim_pin,
+    backlight_reset_pin, led_ind_pins,
+  })
+}
+
+#[derive(Clone)]
 pub struct RegMap {
   pub regs: Vec<[KeyIndex; BUS_WIDTH], MAX_REGS>,
 }

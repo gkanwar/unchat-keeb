@@ -59,9 +59,8 @@ pub fn tick<D: DelayUs<u32>, P: InputPin<Error=Infallible>, Q: OutputPin<Error=I
   switches: &mut switch_matrix::SwitchMatrix<Q>,
   leds: &mut led_matrix::LedMatrix<Q>,
   vkbd: &mut vkeyboard::VKeyboard,
-  usb: &mut usb::Usb,
   delay: &mut D)
-  -> Result<(bus::InputBus<P>, bus::BusLock), Error>
+  -> Result<(bool, bus::InputBus<P>, bus::BusLock), Error>
 where
   P: TryIntoOutputPin<Pin=Q>,
   Q: TryIntoInputPin<Pin=P>,
@@ -76,8 +75,5 @@ where
     bus_lock = new_bus_lock;
     updated = updated || vkbd.update(key_events)?;
   }
-  if updated {
-    usb.send(vkbd)?;
-  }
-  return Ok((in_bus, bus_lock));
+  return Ok((updated, in_bus, bus_lock));
 }

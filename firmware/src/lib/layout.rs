@@ -7,13 +7,13 @@ use core::str;
 
 use crate::prelude::*;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug,Serialize,Deserialize)]
 pub struct Keymap {
-  layout: LayoutKind,
+  pub layout: LayoutKind,
   pub layers: Vec<Vec<Behavior, MAX_KEYS>, MAX_LAYERS>,
 }
 
-#[derive(Debug)]
+#[derive(Debug,Clone,Copy)]
 pub enum LayoutKind {
   LayoutSplit3x6_3,
 }
