@@ -277,17 +277,15 @@ fn rp2040_main() -> ! {
 
   let mut it = general_pins.into_iter();
 
-  let mut in_bus = keeb::bus::InputBus::<GpioIn> {
-    pins: [
-      it.next().unwrap(),
-      it.next().unwrap(),
-      it.next().unwrap(),
-      it.next().unwrap(),
-      it.next().unwrap(),
-      it.next().unwrap(),
-    ]
-  };
-  let mut out_bus = in_bus.into_output_bus();
+  let (in_bus, bus_lock) = keeb::bus::make_bus([
+    it.next().unwrap(),
+    it.next().unwrap(),
+    it.next().unwrap(),
+    it.next().unwrap(),
+    it.next().unwrap(),
+    it.next().unwrap(),
+  ]);
+  let mut out_bus = in_bus.into_output_bus(bus_lock);
 
   // FORNOW:
   // while usb_dev.state() != UsbDeviceState::Configured {

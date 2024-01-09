@@ -55,26 +55,29 @@ use bus::{TryIntoOutputPin, TryIntoInputPin};
 // TODO: need clock info
 pub fn tick<D: DelayUs<u32>, P: InputPin<Error=Infallible>, Q: OutputPin<Error=Infallible>>(
   bus: bus::InputBus<P>,
+  bus_lock: bus::BusLock,
   switches: &mut switch_matrix::SwitchMatrix<Q>,
   leds: &mut led_matrix::LedMatrix<Q>,
   vkbd: &mut vkeyboard::VKeyboard,
   usb: &mut usb::Usb,
   delay: &mut D)
-  -> Result<bus::InputBus<P>, Error>
+  -> Result<(bus::InputBus<P>, bus::BusLock), Error>
 where
   P: TryIntoOutputPin<Pin=Q>,
   Q: TryIntoInputPin<Pin=P>,
 {
-  let mut out_bus = bus.into_output_bus();
+  let mut out_bus = bus.into_output_bus(bus_lock);
   leds.tick(&mut out_bus);
-  let in_bus = out_bus.into_input_bus();
+  let (in_bus, mut bus_lock) = out_bus.into_input_bus();
   let mut updated = false;
   for i in 0..switches.num_regs() {
-    let key_events = switches.subtick(i as RegIndex, &in_bus, delay)?;
+    let (key_events, new_bus_lock) =
+      switches.subtick(i as RegIndex, &in_bus, bus_lock, delay)?;
+    bus_lock = new_bus_lock;
     updated = updated || vkbd.update(key_events)?;
   }
   if updated {
     usb.send(vkbd)?;
   }
-  return Ok(in_bus);
+  return Ok((in_bus, bus_lock));
 }

@@ -5,6 +5,10 @@ use ehal::digital::v2::PinState;
 
 use crate::prelude::*;
 
+// Each bus should have a unique BusLock. Devices outputing to the bus require
+// ownership of the bus lock to do so.
+pub struct BusLock {}
+
 pub trait TryIntoOutputPin {
   type Pin;
   fn try_into_output_pin(self) -> Result<Self::Pin, Error>;
@@ -16,7 +20,14 @@ pub trait TryIntoInputPin {
 
 pub struct InputBus<P: InputPin>
 {
-  pub pins: [P; BUS_WIDTH]
+  pins: [P; BUS_WIDTH]
+}
+
+pub fn make_bus<P: InputPin<Error=Infallible>>(
+  pins: [P; BUS_WIDTH])
+  -> (InputBus<P>, BusLock)
+{
+  (InputBus { pins }, BusLock {})
 }
 
 impl<P: InputPin<Error=Infallible>> InputBus<P> {
@@ -34,7 +45,8 @@ impl<P: InputPin<Error=Infallible>> InputBus<P> {
 
 pub struct OutputBus<Q: OutputPin>
 {
-  pub pins: [Q; BUS_WIDTH]
+  pins: [Q; BUS_WIDTH],
+  lock: BusLock,
 }
 
 impl<Q: OutputPin<Error=Infallible>> OutputBus<Q> {
@@ -52,22 +64,26 @@ impl<Q: OutputPin<Error=Infallible>> OutputBus<Q> {
 
 impl<P: InputPin> InputBus<P>
 {
-  pub fn into_output_bus<Q: OutputPin>(self) -> OutputBus<Q>
+  pub fn into_output_bus<Q: OutputPin>(self, lock: BusLock) -> OutputBus<Q>
   where P: TryIntoOutputPin<Pin=Q>, Q: TryIntoInputPin<Pin=P>
   {
     OutputBus::<Q> {
-      pins: self.pins.map(|p| p.try_into_output_pin().unwrap())
+      pins: self.pins.map(|p| p.try_into_output_pin().unwrap()),
+      lock: lock
     }
   }
 }
 
 impl<P: OutputPin> OutputBus<P>
 {
-  pub fn into_input_bus<Q: InputPin>(self) -> InputBus<Q>
+  pub fn into_input_bus<Q: InputPin>(self) -> (InputBus<Q>, BusLock)
   where P: TryIntoInputPin<Pin=Q>, Q: TryIntoOutputPin<Pin=P>
   {
-    InputBus::<Q> {
-      pins: self.pins.map(|p| p.try_into_input_pin().unwrap())
-    }
+    (
+      InputBus::<Q> {
+        pins: self.pins.map(|p| p.try_into_input_pin().unwrap())
+      },
+      self.lock
+    )
   }
 }

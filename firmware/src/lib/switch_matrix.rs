@@ -6,7 +6,7 @@ use core::convert::Infallible;
 use crate::board::RegMap;
 use crate::vkeyboard::KeyEvent;
 use crate::prelude::*;
-use crate::bus::InputBus;
+use crate::bus::{InputBus, BusLock};
 
 pub struct SwitchMatrix<Q: OutputPin> {
   reg_map: RegMap,
@@ -37,8 +37,9 @@ impl<Q: OutputPin> SwitchMatrix<Q> {
   }
 
   pub fn subtick<D: DelayUs<u32>, P: InputPin<Error=Infallible>>(
-    &mut self, i_reg: RegIndex, bus: &InputBus<P>, delay: &mut D)
-    -> Result<Vec<KeyEvent, BUS_WIDTH>, Error>
+    &mut self, i_reg: RegIndex, bus: &InputBus<P>,
+    bus_lock: BusLock, delay: &mut D)
+    -> Result<(Vec<KeyEvent, BUS_WIDTH>, BusLock), Error>
   {
     let old_state = self.reg_state[i_reg as usize];
     let mut events = Vec::<KeyEvent, BUS_WIDTH>::new();
@@ -63,6 +64,6 @@ impl<Q: OutputPin> SwitchMatrix<Q> {
 
     self.reg_state[i_reg as usize] = new_state;
 
-    return Ok(events);
+    return Ok((events, bus_lock));
   }
 }
