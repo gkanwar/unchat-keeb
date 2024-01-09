@@ -44,7 +44,18 @@ use keeb::{
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
-  // TODO: set panic LED
+  // set panic led
+  cpu::interrupt::free(|cs| {
+    let mut led_pin = Cell::new(None);
+    mutex_led_pin.borrow(cs).swap(&led_pin);
+    match led_pin.get_mut() {
+      Some(pin) => {
+        pin.set_high().unwrap();
+      },
+      _ => {}
+    }
+    mutex_led_pin.borrow(cs).swap(&led_pin);
+  });
   hal::halt();
 }
 
@@ -174,6 +185,8 @@ struct UsbInterface<'a> {
 
 static mutex_usb_interface: Mutex<Cell<Option<UsbInterface>>>
   = Mutex::new(Cell::new(None));
+static mutex_led_pin: Mutex<Cell<Option<GpioOut>>>
+  = Mutex::new(Cell::new(None));
 
 #[allow(non_snake_case)]
 #[interrupt]
@@ -240,11 +253,11 @@ fn rp2040_main() -> ! {
   let usb_interface = Cell::new(Some(UsbInterface {
     usb_dev, usb_kbd_class
   }));
+  cpu::interrupt::free(|cs| {
+    mutex_usb_interface.borrow(cs).swap(&usb_interface);
+  });
   // USB interrupts
   unsafe {
-    cpu::interrupt::free(|cs| {
-      mutex_usb_interface.borrow(cs).swap(&usb_interface);
-    });
     pac::NVIC::unmask(pac::Interrupt::USBCTRL_IRQ);
   }
 
@@ -261,7 +274,10 @@ fn rp2040_main() -> ! {
     .unwrap();
 
   let user_pins = into_user_pins(pins);
-  let mut led_pin = user_pins.led;
+  let led_pin = Cell::new(Some(user_pins.led));
+  cpu::interrupt::free(|cs| {
+    mutex_led_pin.borrow(cs).swap(&led_pin);
+  });
   let mut general_pins = user_pins.general_pins;
   let mut general_ids = user_pins.general_ids;
 
@@ -282,7 +298,7 @@ fn rp2040_main() -> ! {
 
   let mut buf: [u8; 64] = [0; 64]; // for usb OUT packets
   loop {
-    delay.delay_ms(1000);
+    delay.delay_ms(1);
     let (updated, new_in_bus, new_bus_lock) = keeb::tick(
       in_bus, bus_lock, &mut switches, &mut leds, &mut vkbd, &mut delay
     ).unwrap();

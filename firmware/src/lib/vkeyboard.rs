@@ -211,7 +211,21 @@ impl VKeyboard {
     }
   }
 
-  fn apply_vfunc(&mut self, vfunc: VirtualFunction) {
+  fn apply_vfunc_down(&mut self, vfunc: VirtualFunction) {
+    use VirtualFunction::*;
+    match vfunc {
+      VBacklightToggle => {}, // TODO
+      VBacklightUp => {}, // TODO
+      VBacklightDown => {}, // TODO
+      VReset => {}, // TODO
+      VLayerGoto(i) => {}, // TODO
+      VLayerMod(i) => {}, // TODO
+      VLayerToggle(i) => {}, // TODO
+      VLayerTapToggle(i) => {}, // TODO
+    }
+  }
+
+  fn apply_vfunc_up(&mut self, vfunc: VirtualFunction) {
     use VirtualFunction::*;
     match vfunc {
       VBacklightToggle => {}, // TODO
@@ -245,7 +259,7 @@ impl VKeyboard {
           return Ok(true);
         }
         Action::Internal(vfunc) => {
-          self.apply_vfunc(vfunc);
+          self.apply_vfunc_down(vfunc);
           return Ok(false);
         }
         Action::Nothing => {
@@ -261,7 +275,19 @@ impl VKeyboard {
     let layer = self.key_down_layer[idx as usize];
     let behavior = self.keymap.layers[layer as usize][idx as usize];
     let action = behavior_to_action(behavior);
-    // TODO: revert key down
+    match action {
+      Action::SendKey(kui) => {
+        self.apply_kui_up(kui);
+        return Ok(true);
+      }
+      Action::Internal(vfunc) => {
+        self.apply_vfunc_up(vfunc);
+        return Ok(false);
+      }
+      Action::Nothing => {
+        return Ok(false);
+      }
+    }
     Ok(true)
   }
 

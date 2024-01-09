@@ -168,6 +168,7 @@ make_behavior_enum!(
   (End, "KC_END"),
   (PageUp, "KC_PGUP"),
   (PageDown, "KC_PGDN"),
+  (Delete, "KC_DEL"),
   // letters
   (A, "KC_A"),
   (B, "KC_B"),
