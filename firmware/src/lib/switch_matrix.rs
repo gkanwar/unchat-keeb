@@ -46,8 +46,10 @@ impl<Q: OutputPin> SwitchMatrix<Q> {
 
     // guarded by bus lock
     self.reg_en_pins[i_reg as usize].set_low(); // enable
+    delay.delay_us(2);
     let new_state = bus.read();
     self.reg_en_pins[i_reg as usize].set_high(); // disable
+    delay.delay_us(1);
 
     // TODO: software debounce?
     for i in 0..BUS_WIDTH {
