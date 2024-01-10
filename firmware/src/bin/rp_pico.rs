@@ -304,9 +304,10 @@ fn rp2040_main() -> ! {
     ).unwrap();
     in_bus = new_in_bus;
     bus_lock = new_bus_lock;
-    if !updated {
-      continue;
-    }
+    // FORNOW: just spam messages?
+    // if !updated {
+    //   continue;
+    // }
     let report = vkbd.get_report();
     cpu::interrupt::free(|cs| {
       let mut usb_interface = Cell::new(None);

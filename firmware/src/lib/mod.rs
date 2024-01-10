@@ -73,7 +73,8 @@ where
     let (key_events, new_bus_lock) =
       switches.subtick(i as RegIndex, &in_bus, bus_lock, delay)?;
     bus_lock = new_bus_lock;
-    updated = updated || vkbd.update(key_events)?;
+    let now_updated = vkbd.update(key_events)?;
+    updated = updated || now_updated;
   }
   return Ok((updated, in_bus, bus_lock));
 }

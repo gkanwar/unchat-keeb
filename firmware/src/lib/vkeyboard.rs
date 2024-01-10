@@ -298,10 +298,11 @@ impl VKeyboard {
   {
     let mut updated = false;
     for event in key_events.into_iter() {
-      updated = updated || match event {
+      let now_updated = match event {
         KeyEvent::Down(idx) => self.key_down(idx)?,
         KeyEvent::Up(idx) => self.key_up(idx)?,
       };
+      updated = updated || now_updated;
     }
     Ok(updated)
   }
