@@ -23,8 +23,9 @@ pub struct VKeyboard {
   key_down_mask: KeyMask,
   // virtual keymap
   keymap: Keymap,
-  // logical state, as encoded in a USB report
-  logical_state: NKROBootKeyboardReport,
+  // logical state
+  usb_report: NKROBootKeyboardReport,
+  pub reset: bool,
 }
 
 enum VirtualFunction {
@@ -171,12 +172,13 @@ impl VKeyboard {
       key_down_layer: [0; MAX_KEYS],
       key_down_mask: [0; KEY_MASK_LEN],
       keymap: keymap,
-      logical_state: NKROBootKeyboardReport::default(),
+      usb_report: NKROBootKeyboardReport::default(),
+      reset: false,
     })
   }
 
   fn apply_kui_down(&mut self, kui: KeyUsageAndIndex) {
-    let report = &mut self.logical_state;
+    let report = &mut self.usb_report;
     match kui {
       KeyUsageAndIndex::Normal { usage, byte, bit } => {
         for i in 0..report.boot_keys.len() {
@@ -194,7 +196,7 @@ impl VKeyboard {
   }
 
   fn apply_kui_up(&mut self, kui: KeyUsageAndIndex) {
-    let report = &mut self.logical_state;
+    let report = &mut self.usb_report;
     match kui {
       KeyUsageAndIndex::Normal { usage, byte, bit } => {
         for i in 0..report.boot_keys.len() {
@@ -217,11 +219,22 @@ impl VKeyboard {
       VBacklightToggle => {}, // TODO
       VBacklightUp => {}, // TODO
       VBacklightDown => {}, // TODO
-      VReset => {}, // TODO
-      VLayerGoto(i) => {}, // TODO
-      VLayerMod(i) => {}, // TODO
-      VLayerToggle(i) => {}, // TODO
-      VLayerTapToggle(i) => {}, // TODO
+      VReset => {
+        self.reset = true;
+      },
+      VLayerGoto(i) => {
+        self.active_layer_mask = 1 << (i as LayerMask);
+      },
+      VLayerMod(i) => {
+        self.active_layer_mask |= 1 << (i as LayerMask);
+      },
+      VLayerToggle(i) => {
+        self.active_layer_mask ^= 1 << (i as LayerMask);
+      },
+      VLayerTapToggle(i) => {
+        self.active_layer_mask |= 1 << (i as LayerMask);
+        // TODO: count taps
+      },
     }
   }
 
@@ -231,11 +244,16 @@ impl VKeyboard {
       VBacklightToggle => {}, // TODO
       VBacklightUp => {}, // TODO
       VBacklightDown => {}, // TODO
-      VReset => {}, // TODO
-      VLayerGoto(i) => {}, // TODO
-      VLayerMod(i) => {}, // TODO
-      VLayerToggle(i) => {}, // TODO
-      VLayerTapToggle(i) => {}, // TODO
+      VReset => {},
+      VLayerGoto(i) => {},
+      VLayerMod(i) => {
+        self.active_layer_mask &= !(1 << (i as LayerMask));
+      },
+      VLayerToggle(i) => {},
+      VLayerTapToggle(i) => {
+        // TODO: don't disable depending on tap count
+        self.active_layer_mask &= !(1 << (i as LayerMask));
+      },
     }
   }
 
@@ -253,6 +271,7 @@ impl VKeyboard {
       }
       // TODO: set virtual state
       let action = behavior_to_action(behavior);
+      self.key_down_layer[idx as usize] = i as LayerIndex;
       match action {
         Action::SendKey(kui) => {
           self.apply_kui_down(kui);
@@ -303,12 +322,15 @@ impl VKeyboard {
         KeyEvent::Up(idx) => self.key_up(idx)?,
       };
       updated = updated || now_updated;
+      if self.reset {
+        break;
+      }
     }
     Ok(updated)
   }
 
   pub fn get_report<'a>(&'a self) -> &'a NKROBootKeyboardReport {
-    &self.logical_state
+    &self.usb_report
   }
 }
 

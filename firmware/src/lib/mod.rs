@@ -75,6 +75,9 @@ where
     bus_lock = new_bus_lock;
     let now_updated = vkbd.update(key_events)?;
     updated = updated || now_updated;
+    if vkbd.reset {
+      break;
+    }
   }
   return Ok((updated, in_bus, bus_lock));
 }

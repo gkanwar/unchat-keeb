@@ -307,6 +307,9 @@ fn rp2040_main() -> ! {
     ).unwrap();
     in_bus = new_in_bus;
     bus_lock = new_bus_lock;
+    if vkbd.reset {
+      hal::rom_data::reset_to_usb_boot(0, 0);
+    }
     if !updated && !pending {
       continue;
     }
