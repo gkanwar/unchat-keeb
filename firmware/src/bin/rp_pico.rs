@@ -207,6 +207,8 @@ unsafe fn USBCTRL_IRQ() {
 // generic keyboard
 // https://github.com/obdev/v-usb/blob/master/usbdrv/USB-IDs-for-free.txt
 const USB_VID_PID_GEN_KBD: UsbVidPid = UsbVidPid(0x16c0, 0x27db);
+// USB poll bInterval [1-255]
+const USB_POLL_MS: u8 = 1;
 
 #[entry]
 fn rp2040_main() -> ! {
@@ -236,7 +238,7 @@ fn rp2040_main() -> ! {
   )));
   let usb_bus = USB_BUS.as_ref().unwrap();
   let usb_kbd_class = hid_class::HIDClass::new_with_settings(
-    &usb_bus, NKROBootKeyboardReport::desc(), 0,
+    &usb_bus, NKROBootKeyboardReport::desc(), USB_POLL_MS,
     hid_class::HidClassSettings {
       subclass: hid_class::HidSubClass::NoSubClass,
       protocol: hid_class::HidProtocol::Keyboard,
@@ -297,6 +299,7 @@ fn rp2040_main() -> ! {
   let mut vkbd = VKeyboard::new(keymap).unwrap();
 
   let mut buf: [u8; 64] = [0; 64]; // for usb OUT packets
+  let mut pending = false;
   loop {
     delay.delay_ms(1);
     let (updated, new_in_bus, new_bus_lock) = keeb::tick(
@@ -304,10 +307,9 @@ fn rp2040_main() -> ! {
     ).unwrap();
     in_bus = new_in_bus;
     bus_lock = new_bus_lock;
-    // FORNOW: just spam messages?
-    // if !updated {
-    //   continue;
-    // }
+    if !updated && !pending {
+      continue;
+    }
     let report = vkbd.get_report();
     cpu::interrupt::free(|cs| {
       let mut usb_interface = Cell::new(None);
@@ -326,8 +328,12 @@ fn rp2040_main() -> ! {
               Err(err) => panic!("unexpected read error"),
             }
             match usb_kbd_class.push_input(report) {
-              Ok(size) => {},
-              Err(UsbError::WouldBlock) => {}, // buffer full
+              Ok(size) => {
+                pending = false;
+              },
+              Err(UsbError::WouldBlock) => { // buffer full
+                pending = true;
+              },
               Err(err) => panic!("unexpected write error"),
             }
           },
