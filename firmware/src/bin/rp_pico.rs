@@ -246,8 +246,9 @@ fn rp2040_main() -> ! {
     pac.USBCTRL_REGS, pac.USBCTRL_DPRAM, clocks.usb_clock, true, &mut pac.RESETS
   )));
   let usb_bus = USB_BUS.as_ref().unwrap();
+  let desc = NKROBootKeyboardReport::desc();
   let usb_kbd_class = hid_class::HIDClass::new_with_settings(
-    &usb_bus, NKROBootKeyboardReport::desc(), USB_POLL_MS,
+    &usb_bus, desc, USB_POLL_MS,
     hid_class::HidClassSettings {
       subclass: hid_class::HidSubClass::NoSubClass,
       protocol: hid_class::HidProtocol::Keyboard,
@@ -259,8 +260,9 @@ fn rp2040_main() -> ! {
     .manufacturer("gkanwar")
     .product("Unchat-42")
     .serial_number("XXXX")
-    .device_class(USB_CLASS_HID)
     .build();
+  // TODO: OSX doesn't recognize keyboard when HID device class is set
+  // .device_class(USB_CLASS_HID)
   let usb_interface = Cell::new(Some(UsbInterface {
     usb_dev, usb_kbd_class
   }));
@@ -322,7 +324,7 @@ fn rp2040_main() -> ! {
     if !updated && !pending {
       continue;
     }
-    let report = vkbd.get_report();
+    let mut report = vkbd.get_report().clone();
     cpu::interrupt::free(|cs| {
       let mut usb_interface = Cell::new(None);
       mutex_usb_interface.borrow(cs).swap(&usb_interface);
@@ -339,12 +341,30 @@ fn rp2040_main() -> ! {
               Err(UsbError::WouldBlock) => {}, // no data
               Err(err) => panic!("unexpected read error"),
             }
-            match usb_kbd_class.push_input(report) {
+            match usb_kbd_class.get_protocol_mode() {
+              Ok(hid_class::HidProtocolMode::Report) => {
+                for i in 0..report.boot_keys.len() {
+                  report.boot_keys[i] = 0;
+                }
+              }
+              _ => {}
+            }
+            match usb_kbd_class.push_input(&report) {
               Ok(size) => {
                 pending = false;
               },
               Err(UsbError::WouldBlock) => { // buffer full
                 pending = true;
+              },
+              // usbd-hid bug: error on protocol `Report` with subclass `Boot`
+              // hack: forcibly set protocol mode to Boot :(
+              Err(UsbError::InvalidState) => {
+                pending = true;
+                let protocol = usb_kbd_class.get_protocol_mode();
+                if let Ok(protocol) = protocol {
+                  usb_kbd_class.set_protocol_mode(
+                    protocol, hid_class::ProtocolModeConfig::ForceBoot).unwrap();
+                }
               },
               Err(err) => panic!("unexpected write error"),
             }

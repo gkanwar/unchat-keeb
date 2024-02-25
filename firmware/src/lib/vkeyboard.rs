@@ -187,6 +187,7 @@ impl VKeyboard {
             break;
           }
         }
+        assert!(bit < 8 && byte < report.nkro_keys.len());
         report.nkro_keys[byte] |= (1 << bit) as u8;
       }
       KeyUsageAndIndex::Modifier { bit } => {
@@ -199,12 +200,13 @@ impl VKeyboard {
     let report = &mut self.usb_report;
     match kui {
       KeyUsageAndIndex::Normal { usage, byte, bit } => {
-        for i in 0..report.boot_keys.len() {
+        for i in (0..report.boot_keys.len()).rev() {
           if report.boot_keys[i] == usage {
             report.boot_keys[i] = 0;
             break;
           }
         }
+        assert!(bit < 8 && byte < report.nkro_keys.len());
         report.nkro_keys[byte] &= !((1 << bit) as u8);
       }
       KeyUsageAndIndex::Modifier { bit } => {

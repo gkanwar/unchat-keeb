@@ -245,7 +245,7 @@ const _: () = assert!(NKRO_MIN_KEY == 0x02, "Incorrect min usage");
       modifier = input;
     };
     (usage_min = 0x00, usage_max = 0xFF) = {
-      #[item_settings constant,variable,absolute]
+      #[item_settings constant,array,absolute]
       reserved = input;
     };
     (usage_page = LEDS, usage_min = 0x01, usage_max = 0x05) = {
