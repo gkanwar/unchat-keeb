@@ -45,18 +45,27 @@ use keeb::{
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
   // set panic led
+  set_led(true);
+  hal::halt();
+}
+
+fn set_led(state: bool) {
   cpu::interrupt::free(|cs| {
     let mut led_pin = Cell::new(None);
     mutex_led_pin.borrow(cs).swap(&led_pin);
     match led_pin.get_mut() {
       Some(pin) => {
-        pin.set_high().unwrap();
+        if state {
+          pin.set_high().unwrap();
+        }
+        else {
+          pin.set_low().unwrap();
+        }
       },
       _ => {}
     }
     mutex_led_pin.borrow(cs).swap(&led_pin);
   });
-  hal::halt();
 }
 
 type PinOut = gpio::FunctionSio<gpio::SioOutput>;

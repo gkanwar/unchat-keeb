@@ -35,8 +35,6 @@ pub mod prelude {
   pub type RegValue = u8;
   pub type PinIndex = u8;
 
-  pub type KeyUsageMask = [u8; 16];
-
   pub const MAX_EVENTS: usize = 16;
 
   pub const USB_CLASS_HID: u8 = 3;

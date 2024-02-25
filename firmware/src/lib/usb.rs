@@ -5,17 +5,6 @@ use crate::Error;
 use crate::prelude::*;
 use crate::vkeyboard::VKeyboard;
 
-// Usb I/O is handled in the board-specific shell
-// pub struct Usb {
-// }
-
-// impl Usb {
-//   pub fn send(&mut self, report: &NKROBootKeyboardReport) -> Result<(), Error> {
-//     todo!("usb protocol");
-//   }
-// }
-
-
 // from usbd_hid v0.7.0
 // in the future, we can replace this with
 // use usbd_hid::descriptor::KeyboardUsage;
@@ -246,7 +235,7 @@ pub enum KeyboardUsage {
 
 const _: () = assert!(USB_CLASS_HID == 3, "USB class must be keyboard");
 // NOTE: must be in sync with HID descriptor
-const USB_USAGE_MIN: u8 = 0x02;
+const _: () = assert!(NKRO_MIN_KEY == 0x02, "Incorrect min usage");
 
 #[gen_hid_descriptor(
   (collection = APPLICATION, usage_page = GENERIC_DESKTOP, usage = KEYBOARD) = {
@@ -303,8 +292,8 @@ impl KeyUsageAndIndex {
     if usage_idx >= NKRO_MIN_KEY && usage_idx <= NKRO_MAX_KEY {
       Self::Normal {
         usage: usage_idx,
-        byte: ((usage_idx - USB_USAGE_MIN) / 8) as usize,
-        bit: ((usage_idx - USB_USAGE_MIN) % 8) as usize,
+        byte: ((usage_idx - NKRO_MIN_KEY) / 8) as usize,
+        bit: ((usage_idx - NKRO_MIN_KEY) % 8) as usize,
       }
     }
     else if usage_idx >= MIN_MODIFIER && usage_idx <= MAX_MODIFIER {
