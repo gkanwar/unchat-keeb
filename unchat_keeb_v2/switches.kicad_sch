@@ -1,0 +1,5425 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "694eb56a-d63c-4d91-a7fb-46adbb27ce42")
+	(paper "A4")
+	(lib_symbols
+		(symbol "74xx:CD74HC4067SM"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -8.89 22.86 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "CD74HC4067SM"
+				(at 1.27 22.86 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_SO:SSOP-24_5.3x8.2mm_P0.65mm"
+				(at 26.67 -25.4 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/cd74hc4067.pdf"
+				(at -8.89 21.59 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "High-Speed CMOS Logic 16-Channel Analog Multiplexer/Demultiplexer, SSOP-24"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "multiplexer demultiplexer mux demux"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SSOP*5.3x8.2mm*P0.65mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "CD74HC4067SM_0_1"
+				(rectangle
+					(start -8.89 21.59)
+					(end 8.89 -24.13)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "CD74HC4067SM_1_1"
+				(pin passive line
+					(at -12.7 12.7 0)
+					(length 3.81)
+					(name "COM"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 2.54 0)
+					(length 3.81)
+					(name "S0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 0 0)
+					(length 3.81)
+					(name "S1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -27.94 90)
+					(length 3.81)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 -5.08 0)
+					(length 3.81)
+					(name "S3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 -2.54 0)
+					(length 3.81)
+					(name "S2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 -15.24 0)
+					(length 3.81)
+					(name "~{E}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -20.32 180)
+					(length 3.81)
+					(name "I15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -17.78 180)
+					(length 3.81)
+					(name "I14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -15.24 180)
+					(length 3.81)
+					(name "I13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -12.7 180)
+					(length 3.81)
+					(name "I12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 0 180)
+					(length 3.81)
+					(name "I7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -10.16 180)
+					(length 3.81)
+					(name "I11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -7.62 180)
+					(length 3.81)
+					(name "I10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -5.08 180)
+					(length 3.81)
+					(name "I9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -2.54 180)
+					(length 3.81)
+					(name "I8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 25.4 270)
+					(length 3.81)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 2.54 180)
+					(length 3.81)
+					(name "I6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 5.08 180)
+					(length 3.81)
+					(name "I5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 7.62 180)
+					(length 3.81)
+					(name "I4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 10.16 180)
+					(length 3.81)
+					(name "I3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 12.7 180)
+					(length 3.81)
+					(name "I2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 15.24 180)
+					(length 3.81)
+					(name "I1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 17.78 180)
+					(length 3.81)
+					(name "I0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Device:C"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Sensor_Magnetic:DRV5055A3xDBZxQ1"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U1"
+				(at -5.842 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right)
+				)
+			)
+			(property "Value" "DRV5055"
+				(at -6.604 1.27 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Automotive Ratiometric Linear Hall Effect Sensor AEC-Q100"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "DRV5055A3xDBZxQ1_1_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 0 -7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin power_in line
+					(at -2.54 7.62 270)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 2.54 -1.27 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 -10.16 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(junction
+		(at 62.23 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "02e08e27-6412-483b-878a-ef28ba8583c7")
+	)
+	(junction
+		(at 52.07 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0395af1a-24d7-4114-928b-10478d87c77c")
+	)
+	(junction
+		(at 82.55 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "03d010ed-0e58-4427-82ba-1f6857a16128")
+	)
+	(junction
+		(at 62.23 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "059f04aa-d0cd-45b4-9807-b3cf5bd98d43")
+	)
+	(junction
+		(at 82.55 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "06f42c62-3673-4d52-b909-fe8f2fb3b372")
+	)
+	(junction
+		(at 27.94 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0c948380-c17f-449c-84ee-85590dae64dc")
+	)
+	(junction
+		(at 52.07 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "12ce38c9-05ee-4a1e-ae28-525dcd4e689d")
+	)
+	(junction
+		(at 52.07 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1654c74a-035c-4df5-8438-6cf6b3576875")
+	)
+	(junction
+		(at 154.94 80.01)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "16f135fd-4264-4c61-be88-5f36e3d59273")
+	)
+	(junction
+		(at 154.94 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "17d0da6c-e521-4c49-b9d9-1a3b124fb137")
+	)
+	(junction
+		(at 62.23 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1a37f528-ef8b-4018-aba4-5b8bd979f08b")
+	)
+	(junction
+		(at 52.07 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2069aff9-8c90-4db3-ac62-fc9e44d1d934")
+	)
+	(junction
+		(at 29.21 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2458925f-0afd-4d0f-b836-0903c836a06e")
+	)
+	(junction
+		(at 52.07 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "268cd79c-aac7-4727-8f8f-973719c11f4a")
+	)
+	(junction
+		(at 27.94 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "358c63fb-db0d-4bf9-b993-44afa8271588")
+	)
+	(junction
+		(at 62.23 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "384102a0-0bf4-4037-b52c-be5e2cdd486a")
+	)
+	(junction
+		(at 41.91 95.25)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "38ce1fa9-63bc-4cad-b0ad-169c38d97239")
+	)
+	(junction
+		(at 29.21 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3dc2b6e2-938f-498e-920c-b8528bc7cadf")
+	)
+	(junction
+		(at 154.94 62.23)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "401a2fd5-d33d-4933-837e-fbe1376e8eb2")
+	)
+	(junction
+		(at 72.39 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4e47ef43-d8bb-4695-a6aa-2c6dae6f0ad6")
+	)
+	(junction
+		(at 154.94 118.11)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4ed55237-cb64-4212-b194-98ffd61d3f86")
+	)
+	(junction
+		(at 82.55 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "516b495c-07e2-45bb-8eba-d43f4de3e6c2")
+	)
+	(junction
+		(at 62.23 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5402cace-350f-4237-9740-cf868102dda7")
+	)
+	(junction
+		(at 154.94 64.77)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "56c7ef11-ccec-44c1-b07e-20a7086058e5")
+	)
+	(junction
+		(at 186.69 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5b46aa63-c651-4eb8-bef0-65d8077a8421")
+	)
+	(junction
+		(at 72.39 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5dca4966-ba8a-4b77-aaf4-94d1c9443469")
+	)
+	(junction
+		(at 154.94 120.65)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5f2a1375-06d2-4e72-9343-be3fa4ccbb4a")
+	)
+	(junction
+		(at 154.94 123.19)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "60c2438a-b592-47f8-bc7c-2c6d2c09921d")
+	)
+	(junction
+		(at 154.94 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "68693cab-ce34-419f-a58d-adfd8ba27a67")
+	)
+	(junction
+		(at 182.88 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6b43e989-8ced-4e2f-9ed9-36dc893e94eb")
+	)
+	(junction
+		(at 154.94 110.49)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7279726b-441e-4957-81df-c16f0d6525af")
+	)
+	(junction
+		(at 82.55 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7518a22c-4f04-4eb1-ab94-2a4e9e8a7225")
+	)
+	(junction
+		(at 72.39 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7b578c3b-56db-430c-af87-4c30a5b381b6")
+	)
+	(junction
+		(at 154.94 125.73)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8559970b-6202-4b0c-bc8b-97d171bd0ba0")
+	)
+	(junction
+		(at 29.21 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8cd5523b-7487-445c-a149-db081ce21348")
+	)
+	(junction
+		(at 62.23 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "92dc0e13-688a-4f44-92a0-cecfd08d44fd")
+	)
+	(junction
+		(at 154.94 67.31)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "969cf48f-3876-4911-a78a-51e27db8ab19")
+	)
+	(junction
+		(at 27.94 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "99d59f8a-fbd5-4fe1-9a8b-0789879d7ca2")
+	)
+	(junction
+		(at 52.07 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9e15259f-bf3d-470d-a8ab-82ca90444d65")
+	)
+	(junction
+		(at 41.91 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a6852702-4248-4583-96d8-9c4704333a5a")
+	)
+	(junction
+		(at 41.91 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b0ddb3e3-b16f-4463-b460-e760c39d0c12")
+	)
+	(junction
+		(at 154.94 128.27)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b719cffc-8812-4800-944a-e56be6399d7b")
+	)
+	(junction
+		(at 185.42 49.53)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bcc70c3f-acd3-4d53-b3a6-aacf8d302980")
+	)
+	(junction
+		(at 72.39 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "be68a2b1-5e5a-44c5-8717-230efef00ca1")
+	)
+	(junction
+		(at 41.91 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bf9ce904-42b8-470a-9875-b5fd2d462321")
+	)
+	(junction
+		(at 184.15 46.99)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c038923e-f011-4d62-8ad1-146eb1e323e7")
+	)
+	(junction
+		(at 41.91 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d274c552-9920-42a4-95a0-bad559d0608b")
+	)
+	(junction
+		(at 82.55 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dfde6164-7d0f-463b-940a-38bca79285f0")
+	)
+	(junction
+		(at 154.94 115.57)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e3574d4f-ebed-4ab8-ad8a-279a889b4af1")
+	)
+	(junction
+		(at 82.55 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "eadbd42e-9558-4692-95c6-cc598dbe6d32")
+	)
+	(junction
+		(at 41.91 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ef60cbb2-758a-4882-8eea-6b3f3f5c1448")
+	)
+	(junction
+		(at 72.39 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f4bf5f07-20d5-4fb1-bbb8-025175914bde")
+	)
+	(junction
+		(at 72.39 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f67f51cc-ce25-43a7-a681-67c32bfac71d")
+	)
+	(junction
+		(at 41.91 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f76c8278-ef7d-423e-a7ec-7b392a1b712c")
+	)
+	(junction
+		(at 181.61 34.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f9ea9718-f217-44a1-b0d6-4bd57367b14b")
+	)
+	(junction
+		(at 41.91 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fd95e85b-c516-4107-953e-29b25d273cdb")
+	)
+	(wire
+		(pts
+			(xy 153.67 54.61) (xy 153.67 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0034429c-1e20-4602-a2d5-1bc61c9af82b")
+	)
+	(wire
+		(pts
+			(xy 29.21 30.48) (xy 41.91 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "009f5ecb-fa5f-4bb1-b51b-2e29fe855aa5")
+	)
+	(wire
+		(pts
+			(xy 62.23 52.07) (xy 72.39 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "019dc0ac-d7ba-44c7-8420-0da6989b021a")
+	)
+	(wire
+		(pts
+			(xy 105.41 87.63) (xy 105.41 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "04809ca2-2eb2-4273-800d-08fc40074c96")
+	)
+	(wire
+		(pts
+			(xy 87.63 39.37) (xy 87.63 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0509c441-bace-49c1-8c75-1a4bc2964536")
+	)
+	(wire
+		(pts
+			(xy 41.91 91.44) (xy 52.07 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "072395ec-b747-475d-9cdd-3d2069006b3c")
+	)
+	(wire
+		(pts
+			(xy 72.39 30.48) (xy 82.55 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07b4ec32-177a-4430-83f6-751a0e8d131f")
+	)
+	(wire
+		(pts
+			(xy 152.4 57.15) (xy 154.94 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "085ddd33-b53c-46ad-ad7a-8ed9cf0a3907")
+	)
+	(wire
+		(pts
+			(xy 182.88 44.45) (xy 182.88 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08fd92ed-d3a2-4017-a5bb-043fe1a5b32b")
+	)
+	(wire
+		(pts
+			(xy 82.55 91.44) (xy 92.71 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0bd5d672-f8b1-4eec-809c-b510b9f715c8")
+	)
+	(wire
+		(pts
+			(xy 46.99 100.33) (xy 104.14 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0c2b558c-8b25-480e-9d0b-cd0d4cd63b9a")
+	)
+	(wire
+		(pts
+			(xy 180.34 102.87) (xy 182.88 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d72bb03-be64-4746-92e6-26b972392d5e")
+	)
+	(wire
+		(pts
+			(xy 180.34 46.99) (xy 184.15 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0db348fa-bbc7-4e2e-a84b-7598e3af9715")
+	)
+	(wire
+		(pts
+			(xy 154.94 115.57) (xy 154.94 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "10476600-1e26-4441-bfe0-074d05e5f378")
+	)
+	(wire
+		(pts
+			(xy 180.34 44.45) (xy 182.88 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "10f9fd81-f0a8-4b78-b252-cf803ec3ac8d")
+	)
+	(wire
+		(pts
+			(xy 62.23 91.44) (xy 72.39 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "113eac2e-76e2-4ef1-ab3f-014fcda17bbf")
+	)
+	(wire
+		(pts
+			(xy 72.39 52.07) (xy 82.55 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "16023a2d-a7d7-4fb9-8e72-be0e7d774a40")
+	)
+	(wire
+		(pts
+			(xy 180.34 107.95) (xy 185.42 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "18245a06-bef5-4c9f-a3ca-e8a7571790cf")
+	)
+	(wire
+		(pts
+			(xy 185.42 49.53) (xy 213.36 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b5499cc-d90a-4fbc-8967-641bb56535f8")
+	)
+	(wire
+		(pts
+			(xy 87.63 40.64) (xy 119.38 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c381a0e-d4ef-45c3-b1ef-dbf5e432754d")
+	)
+	(wire
+		(pts
+			(xy 181.61 34.29) (xy 181.61 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "27f1efc5-1772-4528-b33f-3de675fdd0d5")
+	)
+	(wire
+		(pts
+			(xy 29.21 73.66) (xy 29.21 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29e9590f-1992-438a-93ce-606deba4d82c")
+	)
+	(wire
+		(pts
+			(xy 154.94 100.33) (xy 134.62 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2c0c3812-55db-4232-8684-3eb6b5b9c0de")
+	)
+	(wire
+		(pts
+			(xy 120.65 39.37) (xy 120.65 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2c6bfbdc-dabe-4065-9064-e6828252a086")
+	)
+	(wire
+		(pts
+			(xy 154.94 118.11) (xy 154.94 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ca9956e-8e3a-4393-a3cf-319d10cde5be")
+	)
+	(wire
+		(pts
+			(xy 29.21 52.07) (xy 29.21 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2dababcb-136a-4eb6-847c-2a3fb75c324f")
+	)
+	(wire
+		(pts
+			(xy 118.11 41.91) (xy 118.11 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f17159d-160f-479c-88dd-d63e58b2adea")
+	)
+	(wire
+		(pts
+			(xy 77.47 60.96) (xy 77.47 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "317d4e40-032c-440e-8c83-81476f281bb7")
+	)
+	(wire
+		(pts
+			(xy 134.62 77.47) (xy 134.62 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "31f46106-9bbd-468f-8212-df7ca568d195")
+	)
+	(wire
+		(pts
+			(xy 97.79 92.71) (xy 97.79 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3363283d-ec9c-4b66-9288-d6bdd4f3d8eb")
+	)
+	(wire
+		(pts
+			(xy 41.91 113.03) (xy 52.07 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37406df1-5d41-46f6-bab5-9870b549da4c")
+	)
+	(wire
+		(pts
+			(xy 102.87 52.07) (xy 153.67 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "38551cbe-085a-4332-b80e-b881f67eb1a1")
+	)
+	(wire
+		(pts
+			(xy 119.38 38.1) (xy 154.94 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3858e526-0f21-467e-b653-6976d447ec01")
+	)
+	(wire
+		(pts
+			(xy 154.94 113.03) (xy 154.94 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39091f38-b3b1-40e9-9fe2-d68114068107")
+	)
+	(wire
+		(pts
+			(xy 114.3 29.21) (xy 114.3 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ba0cd98-4be6-40eb-ad54-376ed8333809")
+	)
+	(wire
+		(pts
+			(xy 87.63 59.69) (xy 99.06 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d225a2f-409b-4597-8921-d42132714b84")
+	)
+	(wire
+		(pts
+			(xy 27.94 69.85) (xy 27.94 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3f01e388-731b-4469-87de-e2b862ec1df6")
+	)
+	(wire
+		(pts
+			(xy 41.91 48.26) (xy 52.07 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40297970-fa40-41e9-a891-7cc4448ad4fe")
+	)
+	(wire
+		(pts
+			(xy 82.55 30.48) (xy 92.71 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "432be7de-c2ad-40db-ba7c-7fbfff433243")
+	)
+	(wire
+		(pts
+			(xy 46.99 100.33) (xy 46.99 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "457ba745-f050-4d6b-b8e5-d88cbd633c4d")
+	)
+	(wire
+		(pts
+			(xy 57.15 44.45) (xy 115.57 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48254f17-6707-4a95-96b6-26ffed2c619f")
+	)
+	(wire
+		(pts
+			(xy 87.63 82.55) (xy 87.63 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48ade50f-2666-424a-a1db-ea5d12a2ec62")
+	)
+	(wire
+		(pts
+			(xy 82.55 73.66) (xy 92.71 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4914f12a-83ed-4ed9-a3e0-e7fc6118551d")
+	)
+	(wire
+		(pts
+			(xy 102.87 55.88) (xy 102.87 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a8e1226-b69e-4aba-b151-a606a536f9a8")
+	)
+	(wire
+		(pts
+			(xy 154.94 105.41) (xy 137.16 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b494a50-2199-4482-b61c-af12dbf9f7eb")
+	)
+	(wire
+		(pts
+			(xy 77.47 58.42) (xy 100.33 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c23b752-c591-49b7-957a-baef81dbcc29")
+	)
+	(wire
+		(pts
+			(xy 46.99 60.96) (xy 46.99 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4fe1db64-3a6c-49f6-a2c8-e63164ed129f")
+	)
+	(wire
+		(pts
+			(xy 97.79 39.37) (xy 120.65 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "530a369f-334c-44ba-9f27-88ed45c67c2d")
+	)
+	(wire
+		(pts
+			(xy 137.16 74.93) (xy 137.16 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "53743361-ab42-4df9-a60c-f1484c8a864e")
+	)
+	(wire
+		(pts
+			(xy 29.21 73.66) (xy 41.91 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "548e6e5f-50bb-49c5-af89-45e1ea5faf65")
+	)
+	(wire
+		(pts
+			(xy 46.99 74.93) (xy 46.99 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5551216b-43de-4249-ad1e-3c04a2137275")
+	)
+	(wire
+		(pts
+			(xy 154.94 38.1) (xy 154.94 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57901cd2-4449-4c78-af38-5cfd64ce0f74")
+	)
+	(wire
+		(pts
+			(xy 152.4 80.01) (xy 154.94 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5863c5c6-bc66-460d-bb9f-f0f26266b9d2")
+	)
+	(wire
+		(pts
+			(xy 62.23 73.66) (xy 72.39 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "586af5e9-c2f1-4b04-be06-768c4d14e64a")
+	)
+	(wire
+		(pts
+			(xy 77.47 82.55) (xy 77.47 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5abfd891-4273-4f37-aba3-d2c81a12f2a1")
+	)
+	(wire
+		(pts
+			(xy 154.94 133.35) (xy 160.02 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d47791e-2d14-4b2b-af06-954096ac25f0")
+	)
+	(wire
+		(pts
+			(xy 25.4 48.26) (xy 27.94 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5dc439d7-5fee-408d-bea3-f3f7fa012179")
+	)
+	(wire
+		(pts
+			(xy 52.07 73.66) (xy 62.23 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61678be4-8618-47fa-9e46-71f5ad6d7f59")
+	)
+	(wire
+		(pts
+			(xy 118.11 36.83) (xy 154.94 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61994bda-ee81-439a-8933-1f2167acafc1")
+	)
+	(wire
+		(pts
+			(xy 180.34 120.65) (xy 189.23 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "63389acf-726b-4290-a4bd-6d3ce82b4eb7")
+	)
+	(wire
+		(pts
+			(xy 57.15 101.6) (xy 105.41 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "63c0fa3a-3a5e-456e-9490-8f37444d123d")
+	)
+	(wire
+		(pts
+			(xy 154.94 120.65) (xy 154.94 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "63ebdee6-9fd7-4baf-aec9-b816fefd7bb9")
+	)
+	(wire
+		(pts
+			(xy 100.33 58.42) (xy 100.33 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "664f2769-e705-48f8-be36-9cc19a542a4e")
+	)
+	(wire
+		(pts
+			(xy 41.91 73.66) (xy 52.07 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "67cd395a-3d2f-48c2-b968-ed712926c0a0")
+	)
+	(wire
+		(pts
+			(xy 41.91 69.85) (xy 52.07 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68ef8450-d16c-4b63-b7f5-89db2e3ca7e2")
+	)
+	(wire
+		(pts
+			(xy 41.91 52.07) (xy 52.07 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68fb1b89-577c-489c-a2b3-6d9bb895eeae")
+	)
+	(wire
+		(pts
+			(xy 100.33 49.53) (xy 154.94 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "695bbb45-8576-47c0-9a13-51086249f15e")
+	)
+	(wire
+		(pts
+			(xy 185.42 107.95) (xy 185.42 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72139807-e700-4e70-b45e-ff103b8a7a43")
+	)
+	(wire
+		(pts
+			(xy 101.6 57.15) (xy 101.6 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72173b0e-3cb5-41a8-8d3e-a64071240fa9")
+	)
+	(wire
+		(pts
+			(xy 99.06 59.69) (xy 99.06 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75553be5-ccc4-49f1-b6fb-bd2bfc61d700")
+	)
+	(wire
+		(pts
+			(xy 180.34 62.23) (xy 189.23 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77dd67a2-5902-4825-a0e2-3afc6a059d0c")
+	)
+	(wire
+		(pts
+			(xy 186.69 110.49) (xy 186.69 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77ffbb62-d65e-4ec3-a8af-411ba21e56d4")
+	)
+	(wire
+		(pts
+			(xy 154.94 102.87) (xy 135.89 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7842f4d1-e381-4099-a5d9-828206857cc8")
+	)
+	(wire
+		(pts
+			(xy 77.47 39.37) (xy 77.47 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78d4f56d-384d-470b-b1c5-30bc58b0115b")
+	)
+	(wire
+		(pts
+			(xy 154.94 125.73) (xy 154.94 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79777441-0286-4754-a940-311ca3b133f5")
+	)
+	(wire
+		(pts
+			(xy 154.94 128.27) (xy 152.4 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79d8c31b-6fc9-4015-9091-f69e15c2a421")
+	)
+	(wire
+		(pts
+			(xy 29.21 52.07) (xy 41.91 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ae3e964-d8e4-4cd2-9cbd-322f52aaa2b3")
+	)
+	(wire
+		(pts
+			(xy 133.35 78.74) (xy 133.35 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7afa7a6f-9419-46cd-84f3-e9a0b67e0242")
+	)
+	(wire
+		(pts
+			(xy 67.31 60.96) (xy 67.31 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c2e61f1-b0a7-4bed-a44a-33a72e165d13")
+	)
+	(wire
+		(pts
+			(xy 120.65 41.91) (xy 154.94 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c83b1bb-4030-4203-beda-85a4ed1d8fd9")
+	)
+	(wire
+		(pts
+			(xy 46.99 54.61) (xy 104.14 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ccbde2c-cede-4474-bbfc-20908952c34d")
+	)
+	(wire
+		(pts
+			(xy 29.21 95.25) (xy 41.91 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7da3d926-bb91-4cf5-82c3-00f6a24a1ca3")
+	)
+	(wire
+		(pts
+			(xy 181.61 34.29) (xy 180.34 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e304156-a43f-4c96-a591-38fc94fa29a1")
+	)
+	(wire
+		(pts
+			(xy 27.94 113.03) (xy 41.91 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86eb6fb1-1363-4f69-970d-a7197631e588")
+	)
+	(wire
+		(pts
+			(xy 154.94 64.77) (xy 154.94 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87173aa4-7c2a-4d0a-8d52-c4073da34925")
+	)
+	(wire
+		(pts
+			(xy 72.39 69.85) (xy 82.55 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87a665c7-2dcf-46b9-b0f0-de72e114a030")
+	)
+	(wire
+		(pts
+			(xy 82.55 52.07) (xy 92.71 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8822aa77-43df-4424-abbd-72d402431772")
+	)
+	(wire
+		(pts
+			(xy 46.99 45.72) (xy 114.3 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a593727-bfad-43a4-be0c-3a335ee913b2")
+	)
+	(wire
+		(pts
+			(xy 99.06 48.26) (xy 123.19 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8aee0142-2c90-4221-ab14-700c43de4659")
+	)
+	(wire
+		(pts
+			(xy 154.94 123.19) (xy 154.94 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b28659d-c23d-48b2-9af1-74cd90814c4a")
+	)
+	(wire
+		(pts
+			(xy 57.15 104.14) (xy 57.15 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e70d23b-452c-4273-a820-38bfb8649c2f")
+	)
+	(wire
+		(pts
+			(xy 27.94 113.03) (xy 27.94 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8ff8d635-b94d-4cb6-aead-a05f28e899b1")
+	)
+	(wire
+		(pts
+			(xy 154.94 62.23) (xy 154.94 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "904471ea-9252-4fdf-a980-73be0518bcf2")
+	)
+	(wire
+		(pts
+			(xy 104.14 54.61) (xy 104.14 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "912ee610-104d-4d50-b651-9bddf682d518")
+	)
+	(wire
+		(pts
+			(xy 82.55 69.85) (xy 92.71 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91df3b58-febb-4895-b3e9-2626f1c8d33e")
+	)
+	(wire
+		(pts
+			(xy 184.15 46.99) (xy 213.36 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92b9a26c-f415-4e9c-b610-7ebb291be16e")
+	)
+	(wire
+		(pts
+			(xy 154.94 95.25) (xy 87.63 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9367b9fa-2d88-48c5-88b3-09b96fcd39d7")
+	)
+	(wire
+		(pts
+			(xy 184.15 46.99) (xy 184.15 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "93864000-1a86-4ab2-bc4b-3c79972fffc5")
+	)
+	(wire
+		(pts
+			(xy 27.94 91.44) (xy 41.91 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95f5d515-02d4-40f7-b324-aaab2391fee6")
+	)
+	(wire
+		(pts
+			(xy 135.89 76.2) (xy 135.89 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "98054f6f-884c-48a8-a638-063021fcfe52")
+	)
+	(wire
+		(pts
+			(xy 52.07 48.26) (xy 62.23 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a5ee848-952e-4a59-b92d-9f860cba0bb4")
+	)
+	(wire
+		(pts
+			(xy 67.31 57.15) (xy 101.6 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9bdc5fb2-4e0a-42e3-8ac2-a38f98d055de")
+	)
+	(wire
+		(pts
+			(xy 180.34 105.41) (xy 184.15 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9e1c987d-bc5d-4e07-88a2-983e4f78864f")
+	)
+	(wire
+		(pts
+			(xy 121.92 44.45) (xy 154.94 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0632e51-c00a-493b-b56f-5856c105295f")
+	)
+	(wire
+		(pts
+			(xy 154.94 74.93) (xy 160.02 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a184cdaf-f7c3-4007-8fb7-e696c0ff631e")
+	)
+	(wire
+		(pts
+			(xy 116.84 43.18) (xy 116.84 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a3600948-6672-4351-8806-6df8b8b50767")
+	)
+	(wire
+		(pts
+			(xy 114.3 29.21) (xy 154.94 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a476a314-ea0a-4d1c-b10e-51479fadea92")
+	)
+	(wire
+		(pts
+			(xy 121.92 46.99) (xy 121.92 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a4eb9716-258d-4238-b034-121234ac6e16")
+	)
+	(wire
+		(pts
+			(xy 104.14 90.17) (xy 104.14 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a70f7303-034c-4e0e-bc53-b70c571c8d0d")
+	)
+	(wire
+		(pts
+			(xy 52.07 69.85) (xy 62.23 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a79068c7-94e6-4a29-ae08-115a936e2d54")
+	)
+	(wire
+		(pts
+			(xy 97.79 92.71) (xy 154.94 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7e79cde-37e3-4c66-9be8-e74ae45e3731")
+	)
+	(wire
+		(pts
+			(xy 67.31 82.55) (xy 67.31 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa33a01e-dbbd-4e3b-a1d9-fdf29c0c2f6b")
+	)
+	(wire
+		(pts
+			(xy 97.79 60.96) (xy 97.79 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab14e6c4-944a-4866-9255-5dbc3bd76b54")
+	)
+	(wire
+		(pts
+			(xy 46.99 74.93) (xy 137.16 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab917ef6-47b7-46f4-9eda-6099c4531d50")
+	)
+	(wire
+		(pts
+			(xy 154.94 110.49) (xy 154.94 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "abf4a2bb-f534-4052-b6ef-06d6b0afb87d")
+	)
+	(wire
+		(pts
+			(xy 123.19 46.99) (xy 154.94 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac0e569c-69d4-4773-b543-7ec41cba7337")
+	)
+	(wire
+		(pts
+			(xy 104.14 53.34) (xy 152.4 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "adb25662-9376-406c-aba5-c55896512917")
+	)
+	(wire
+		(pts
+			(xy 77.47 78.74) (xy 133.35 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b114313a-21ce-4b18-a7d6-37b23d977c30")
+	)
+	(wire
+		(pts
+			(xy 115.57 31.75) (xy 154.94 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b126169c-6ee0-459c-b927-2f456970c57c")
+	)
+	(wire
+		(pts
+			(xy 57.15 76.2) (xy 135.89 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b159aad7-e897-4f26-8c3e-a2e06a3486b0")
+	)
+	(wire
+		(pts
+			(xy 72.39 91.44) (xy 82.55 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1a5b64c-d7a6-4e7c-9f16-5286475df47b")
+	)
+	(wire
+		(pts
+			(xy 72.39 73.66) (xy 82.55 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b263d1d8-0eb3-4c3a-8564-02e31230c734")
+	)
+	(wire
+		(pts
+			(xy 27.94 48.26) (xy 41.91 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b989536b-c5a9-49da-a05c-3f6fc7535941")
+	)
+	(wire
+		(pts
+			(xy 67.31 43.18) (xy 116.84 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9f22575-72a9-4051-8b57-967954311eb5")
+	)
+	(wire
+		(pts
+			(xy 41.91 95.25) (xy 52.07 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba13fc2c-fd0e-42ff-ae41-58820ed6e82c")
+	)
+	(wire
+		(pts
+			(xy 213.36 34.29) (xy 181.61 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb48f0af-96f1-4cf6-a02a-6160d388bcbc")
+	)
+	(wire
+		(pts
+			(xy 67.31 39.37) (xy 67.31 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bcd941df-8c24-46c1-b079-3e97d8018533")
+	)
+	(wire
+		(pts
+			(xy 119.38 40.64) (xy 119.38 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bdd7973e-a0e2-4853-a500-14938b4b88a9")
+	)
+	(wire
+		(pts
+			(xy 154.94 80.01) (xy 167.64 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bdd93686-0fd2-4ea3-b146-3ce9ab342b22")
+	)
+	(wire
+		(pts
+			(xy 57.15 55.88) (xy 102.87 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "befe24df-01f8-4d95-926c-0fb2fddcc8d6")
+	)
+	(wire
+		(pts
+			(xy 152.4 53.34) (xy 152.4 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c09ac102-de6b-4759-a91d-2ca388a06ce5")
+	)
+	(wire
+		(pts
+			(xy 116.84 34.29) (xy 154.94 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c12458fa-2fc2-43fb-9665-114b9b4bcb0d")
+	)
+	(wire
+		(pts
+			(xy 87.63 60.96) (xy 87.63 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c13693bc-6748-4f21-9b0b-fb544638c5b1")
+	)
+	(wire
+		(pts
+			(xy 52.07 30.48) (xy 62.23 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1ad7e2a-7bf1-4cda-8f01-11310a45a93b")
+	)
+	(wire
+		(pts
+			(xy 77.47 41.91) (xy 118.11 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4083ce8-88ce-4c6e-a24d-756f3fcc3894")
+	)
+	(wire
+		(pts
+			(xy 154.94 67.31) (xy 154.94 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4d6ff1d-e065-45e6-87bd-3b7fceaec093")
+	)
+	(wire
+		(pts
+			(xy 82.55 48.26) (xy 92.71 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8ee9fc5-13f2-43cf-b89e-819f13284172")
+	)
+	(wire
+		(pts
+			(xy 41.91 30.48) (xy 52.07 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c90045eb-3880-4762-9214-67ad96ae0772")
+	)
+	(wire
+		(pts
+			(xy 52.07 52.07) (xy 62.23 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca3a76e8-3779-44a6-8b88-a7f8ce569a20")
+	)
+	(wire
+		(pts
+			(xy 67.31 77.47) (xy 134.62 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ccc144a3-8844-4d0b-8cea-0385f3173317")
+	)
+	(wire
+		(pts
+			(xy 154.94 90.17) (xy 104.14 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce8ceabd-a164-4702-a71b-32f54d3c69a6")
+	)
+	(wire
+		(pts
+			(xy 180.34 52.07) (xy 186.69 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ceca7a06-b33c-43b0-94ee-9d3ba9f0372a")
+	)
+	(wire
+		(pts
+			(xy 46.99 39.37) (xy 46.99 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf564ee3-8c14-47ad-b466-9372024ea2bd")
+	)
+	(wire
+		(pts
+			(xy 62.23 69.85) (xy 72.39 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d03ee8c8-099c-45ec-b2c8-5a37a27db80f")
+	)
+	(wire
+		(pts
+			(xy 154.94 97.79) (xy 133.35 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d487381a-a14c-4ffc-8053-d06aea7364bf")
+	)
+	(wire
+		(pts
+			(xy 154.94 107.95) (xy 154.94 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4ce9305-e068-41b1-ab06-3412b21fb0ab")
+	)
+	(wire
+		(pts
+			(xy 154.94 50.8) (xy 154.94 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4daf48b-be48-4b7c-83a6-b7086de415b1")
+	)
+	(wire
+		(pts
+			(xy 97.79 46.99) (xy 121.92 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d79ac1b3-5a9b-452c-a2f8-24bb757ea394")
+	)
+	(wire
+		(pts
+			(xy 52.07 91.44) (xy 62.23 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d7ac0cc5-89ae-48c0-8385-1368c4477f07")
+	)
+	(wire
+		(pts
+			(xy 101.6 50.8) (xy 154.94 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8f9156e-f34f-4cc9-944d-ed8ce9b918ea")
+	)
+	(wire
+		(pts
+			(xy 154.94 59.69) (xy 154.94 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dce723f8-c329-46bd-a11e-bbeb2285cb25")
+	)
+	(wire
+		(pts
+			(xy 180.34 110.49) (xy 186.69 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "debabf13-26f6-4f85-80ab-a6259e4fad2c")
+	)
+	(wire
+		(pts
+			(xy 29.21 95.25) (xy 29.21 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df088d5e-f830-4210-a8ef-17f347ff4559")
+	)
+	(wire
+		(pts
+			(xy 57.15 39.37) (xy 57.15 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e03fe20d-a1ab-4f68-b192-8d438fcc4bda")
+	)
+	(wire
+		(pts
+			(xy 182.88 44.45) (xy 213.36 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e0f3e48c-f37c-42dc-8b21-0e6925533458")
+	)
+	(wire
+		(pts
+			(xy 180.34 49.53) (xy 185.42 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e31039c4-29f0-4dee-8cab-db31ad59ce1a")
+	)
+	(wire
+		(pts
+			(xy 27.94 69.85) (xy 41.91 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5e43620-4f8a-44ab-a50f-b93c0a68ba76")
+	)
+	(wire
+		(pts
+			(xy 154.94 87.63) (xy 105.41 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7593c46-478d-43ef-94e7-d7bd553b7b16")
+	)
+	(wire
+		(pts
+			(xy 154.94 54.61) (xy 153.67 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb45acc9-74da-42c5-9c37-f905203028c0")
+	)
+	(wire
+		(pts
+			(xy 115.57 44.45) (xy 115.57 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ebc6c34c-b2c4-4bed-b373-1e85cbf68cff")
+	)
+	(wire
+		(pts
+			(xy 27.94 91.44) (xy 27.94 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ecdb1d9f-9876-41f9-9771-101e74a2332e")
+	)
+	(wire
+		(pts
+			(xy 154.94 74.93) (xy 154.94 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f0945b48-b864-43e1-bc67-59da9719bc6a")
+	)
+	(wire
+		(pts
+			(xy 154.94 128.27) (xy 154.94 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f10ec869-15b3-458a-9caa-02e4b2c3724a")
+	)
+	(wire
+		(pts
+			(xy 62.23 48.26) (xy 72.39 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f14f1803-5818-4b99-b22d-e94b60fd6705")
+	)
+	(wire
+		(pts
+			(xy 57.15 60.96) (xy 57.15 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5520163-91a1-4abe-9e53-c7a28bbbdcf1")
+	)
+	(wire
+		(pts
+			(xy 72.39 48.26) (xy 82.55 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5836bca-c4d7-45d0-ab3a-9163bff06779")
+	)
+	(wire
+		(pts
+			(xy 186.69 52.07) (xy 213.36 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f74b4f50-e40c-4626-9f4d-55e8b511c167")
+	)
+	(wire
+		(pts
+			(xy 25.4 30.48) (xy 29.21 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f855cc4d-1f38-45ce-b1c6-34594f74efc0")
+	)
+	(wire
+		(pts
+			(xy 57.15 82.55) (xy 57.15 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa100191-e6fe-40a4-b116-2c1b915dcccd")
+	)
+	(wire
+		(pts
+			(xy 62.23 30.48) (xy 72.39 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fbddcdf0-585b-44e4-a462-ca39d2753674")
+	)
+	(wire
+		(pts
+			(xy 123.19 48.26) (xy 123.19 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff0cdb40-d080-4e8a-9c9c-23f09730efa7")
+	)
+	(wire
+		(pts
+			(xy 180.34 92.71) (xy 181.61 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ffdb1a60-0a8f-4c36-b53f-d27e1e0b6c4f")
+	)
+	(global_label "M11"
+		(shape input)
+		(at 87.63 60.96 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0125278e-ba41-4cc3-a1d5-f4f747b82748")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 94.4856 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M19"
+		(shape input)
+		(at 46.99 104.14 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "03869a66-ad45-4035-bae2-72cfbb50cee8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 53.8456 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M10"
+		(shape input)
+		(at 77.47 59.69 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "081bff1d-adfa-46ad-a505-4c27910dfa3c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 84.3256 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M9"
+		(shape input)
+		(at 67.31 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "19338a22-689a-44d0-8ce9-b0e799c7c0f1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 72.9561 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M8"
+		(shape input)
+		(at 57.15 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3711a334-d909-4baf-bfa2-843459280bb1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 62.7961 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M1"
+		(shape input)
+		(at 46.99 41.91 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3d037022-ce73-485b-9049-68d390106514")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 52.6361 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M2"
+		(shape input)
+		(at 57.15 41.91 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "436d5489-2e0a-49a0-abdd-a9aae7d14384")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 62.7961 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M6"
+		(shape input)
+		(at 102.87 39.37 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4d497c75-5da7-438d-bf5c-39a6f9f1bbd4")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 102.87 33.7239 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M4"
+		(shape input)
+		(at 77.47 39.37 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "58ee445f-f19e-4c3f-9c83-71f985119a54")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 83.1161 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M16"
+		(shape input)
+		(at 77.47 82.55 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5e8f644a-4330-4218-82bc-5cd780802880")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 84.3256 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M12"
+		(shape input)
+		(at 97.79 60.96 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6f3c2959-6e92-48ce-b673-49faa0f8633d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 104.6456 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M14"
+		(shape input)
+		(at 57.15 82.55 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7e76721f-83e9-46d6-8b90-339f63b1180b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 64.0056 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M20"
+		(shape input)
+		(at 57.15 104.14 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8fc42377-8c4c-461b-b6f8-6dc6d83ce75c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 64.0056 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M3"
+		(shape input)
+		(at 67.31 41.91 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a25d7d6c-ef75-48fd-88ff-b2858366b055")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 72.9561 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M13"
+		(shape input)
+		(at 46.99 82.55 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "aa388760-3f46-4fc7-8d0f-01b215a92d0f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 53.8456 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M18"
+		(shape input)
+		(at 97.79 82.55 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c422b5b0-818e-454b-8e2b-b787abd3218e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 104.6456 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M17"
+		(shape input)
+		(at 87.63 82.55 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c5e5a07f-5162-4aec-a582-9061ec76a9ad")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 94.4856 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M7"
+		(shape input)
+		(at 46.99 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c90c759f-3779-490f-8744-01bb4c3cce09")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 52.6361 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M15"
+		(shape input)
+		(at 67.31 82.55 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d6c7a829-c0e7-4bba-be02-54ce95d01f57")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 74.1656 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "M5"
+		(shape input)
+		(at 87.63 39.37 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "eee9b0d7-06c4-4c36-8f5e-3fa8ef8a39b3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 93.2761 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(hierarchical_label "OUT2"
+		(shape input)
+		(at 189.23 120.65 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "175f1f3d-534e-42d4-8c30-13766228fd56")
+	)
+	(hierarchical_label "S2"
+		(shape input)
+		(at 213.36 46.99 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "246ba5cc-28ae-4334-85e6-809da56afd6e")
+	)
+	(hierarchical_label "VCC"
+		(shape input)
+		(at 167.64 74.93 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2b76a9b4-aa2b-4d4d-b684-11491c73fc95")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 152.4 128.27 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "2d8b0729-323d-45cc-bf36-32fe64390b04")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 25.4 48.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "32cffc32-955d-4499-992f-57c96380a284")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 152.4 80.01 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "536e469b-578c-4627-a1e5-3e9b2693cd32")
+	)
+	(hierarchical_label "S0"
+		(shape input)
+		(at 213.36 52.07 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "62cd1b84-7e9f-4dd1-a62b-154e645d62e2")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 213.36 34.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6a23f206-32c3-4859-acbc-e490302cb972")
+	)
+	(hierarchical_label "VCC"
+		(shape input)
+		(at 25.4 30.48 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6d7fb0f4-7ffd-467c-93f2-eb48fcc006be")
+	)
+	(hierarchical_label "OUT1"
+		(shape input)
+		(at 189.23 62.23 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7d5034d4-4c90-4420-93cd-d7ef14e2c78c")
+	)
+	(hierarchical_label "S3"
+		(shape input)
+		(at 213.36 44.45 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8ea3b486-8c01-4bf9-bc22-243d1329a693")
+	)
+	(hierarchical_label "VCC"
+		(shape input)
+		(at 167.64 133.35 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "af9bfe21-85f4-4e7a-8fe4-14f21dd17fa7")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 167.64 21.59 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c029eadc-a0b9-4fc6-860e-6380e1c949c4")
+	)
+	(hierarchical_label "S1"
+		(shape input)
+		(at 213.36 49.53 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c3bdbac3-0965-4e91-af9f-2876d69ebf7b")
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 54.61 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "091189e4-3d8a-44c6-ba69-04ecc89e5e1b")
+		(property "Reference" "U20"
+			(at 48.26 102.8699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 48.26 105.4099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 54.61 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 54.61 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 54.61 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "0d1aadbd-3643-4af8-ab82-c505d989cf2e")
+		)
+		(pin "1"
+			(uuid "ea075abd-7bac-4285-90a1-b0cb1ffbedad")
+		)
+		(pin "3"
+			(uuid "59f62ee5-7c87-425b-a8be-fabc066ec6b9")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U20")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U70")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 74.93 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "17fe1bd4-e48e-4713-96f2-f18359a37de7")
+		(property "Reference" "U16"
+			(at 68.58 81.2799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 68.58 83.8199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 74.93 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 74.93 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 74.93 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "b7ebd434-1632-49bf-8ce3-a490303e8629")
+		)
+		(pin "1"
+			(uuid "64f2857c-991b-4fa9-90ee-2cfb8a0670e8")
+		)
+		(pin "3"
+			(uuid "d27ad438-9185-4dc7-8241-5460380a3b96")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U16")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U66")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:CD74HC4067SM")
+		(at 167.64 49.53 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1cf2d044-a368-46b9-8617-b0cfc04eab75")
+		(property "Reference" "U22"
+			(at 170.6565 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "CD74HC4067SM"
+			(at 170.6565 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_SO:SSOP-24_5.3x8.2mm_P0.65mm"
+			(at 140.97 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/cd74hc4067.pdf"
+			(at 176.53 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "High-Speed CMOS Logic 16-Channel Analog Multiplexer/Demultiplexer, SSOP-24"
+			(at 167.64 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "24"
+			(uuid "9921422b-7014-4861-b994-ce1eface9309")
+		)
+		(pin "2"
+			(uuid "5cdd3ac1-1993-4a2b-ab58-c809adf4c2ab")
+		)
+		(pin "21"
+			(uuid "64fa7e78-4f0a-45ae-95d8-8d2fcecb5d58")
+		)
+		(pin "4"
+			(uuid "c3a4c354-497c-43ba-87ee-db0c3882cd4a")
+		)
+		(pin "22"
+			(uuid "bb049ca2-a71f-45a5-a6b8-d2be9d01e583")
+		)
+		(pin "18"
+			(uuid "dc44e15c-0891-4981-a68e-991487f883b3")
+		)
+		(pin "11"
+			(uuid "bddea132-6b79-408a-ba5e-300de2b44b9a")
+		)
+		(pin "6"
+			(uuid "db13fdc8-97bd-4ea7-a740-c57cc58ae8ab")
+		)
+		(pin "19"
+			(uuid "2d5bea47-35df-4c87-b518-46a8aac18508")
+		)
+		(pin "17"
+			(uuid "1d084eda-a4f8-4fcd-97d1-df764bf48fbf")
+		)
+		(pin "23"
+			(uuid "b82788ed-7526-451b-990e-c15838825880")
+		)
+		(pin "9"
+			(uuid "55891029-4d03-4e2d-af2a-1f45f6ab060d")
+		)
+		(pin "7"
+			(uuid "79fe1323-016a-42a7-84c3-de9d3811e2b6")
+		)
+		(pin "1"
+			(uuid "3dd89cf4-286d-41f2-9469-52fe135bc0d8")
+		)
+		(pin "20"
+			(uuid "e8ecd825-1ffc-49ab-b63f-e9bf401295a7")
+		)
+		(pin "10"
+			(uuid "f524d1b4-d1ca-4d83-8b0b-9cf97bdd816c")
+		)
+		(pin "15"
+			(uuid "ace4f36f-48c0-4287-b57a-ff710c692992")
+		)
+		(pin "12"
+			(uuid "e7bb934c-7b5a-4028-b7fa-026218c600ba")
+		)
+		(pin "14"
+			(uuid "6eded707-e34a-4140-ac36-0cdeeaa8beef")
+		)
+		(pin "13"
+			(uuid "4afcbc79-e086-40a9-8c09-f4cc86974c94")
+		)
+		(pin "3"
+			(uuid "f8b3e872-1bce-45b5-bdd4-3f94473a081d")
+		)
+		(pin "5"
+			(uuid "f3188bfd-a1b2-4253-b3db-f0fe41105b9f")
+		)
+		(pin "8"
+			(uuid "305760d5-d729-4e40-8859-0cebc43872e1")
+		)
+		(pin "16"
+			(uuid "c092fbc1-1e17-4de2-af9b-8f7909912697")
+		)
+		(instances
+			(project ""
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U22")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U72")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 163.83 74.93 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "26fbcbfc-d819-4330-87f6-a3fbf0637b0b")
+		(property "Reference" "C22"
+			(at 161.29 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 161.798 73.66 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 167.64 75.8952 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 163.83 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 163.83 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "093306d0-653b-4003-b1b8-3b27971d5318")
+		)
+		(pin "1"
+			(uuid "41ba3c61-5bbf-4a28-9f39-c75ac26d7ad8")
+		)
+		(instances
+			(project ""
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "C22")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "C72")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 95.25 59.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "305eeaf1-2096-4484-b401-85547fc80e8c")
+		(property "Reference" "U12"
+			(at 88.9 59.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 88.9 62.2299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 95.25 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 95.25 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 95.25 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "117febe5-c8bb-41bd-a506-246e925b9b8a")
+		)
+		(pin "1"
+			(uuid "71d87c34-b2d1-4cdf-9292-4420d5e7bef1")
+		)
+		(pin "3"
+			(uuid "6163f9dd-8976-4874-b216-0b667578515a")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U12")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U62")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:CD74HC4067SM")
+		(at 167.64 107.95 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "39aceb15-cb76-4900-b925-268affbb3784")
+		(property "Reference" "U23"
+			(at 170.6565 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "CD74HC4067SM"
+			(at 170.6565 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_SO:SSOP-24_5.3x8.2mm_P0.65mm"
+			(at 140.97 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/cd74hc4067.pdf"
+			(at 176.53 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "High-Speed CMOS Logic 16-Channel Analog Multiplexer/Demultiplexer, SSOP-24"
+			(at 167.64 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "24"
+			(uuid "92302628-e2b4-4630-86cf-709f935be011")
+		)
+		(pin "2"
+			(uuid "78e49615-4a49-4e76-ba35-9bb8a4b0c52c")
+		)
+		(pin "21"
+			(uuid "976ccd2b-71cc-4fbe-8f77-c94e56d3a757")
+		)
+		(pin "4"
+			(uuid "f3288259-4292-4650-b651-bc0826dcd3f9")
+		)
+		(pin "22"
+			(uuid "807b9db4-da4f-4705-ac76-a4620bbb406d")
+		)
+		(pin "18"
+			(uuid "7b1188d3-1e96-4148-8625-5994d2463153")
+		)
+		(pin "11"
+			(uuid "e23c61ee-bd6d-48bb-9af5-4a99f2bdf93e")
+		)
+		(pin "6"
+			(uuid "1655aecd-0ebc-418c-9fd8-14340b772b27")
+		)
+		(pin "19"
+			(uuid "8a48eca9-fdf8-4405-9039-0a4befe46b10")
+		)
+		(pin "17"
+			(uuid "9ffaecbf-69dc-4c7f-9605-2561a2c429ad")
+		)
+		(pin "23"
+			(uuid "47a8ded6-29aa-499c-9d1c-b59adf76946e")
+		)
+		(pin "9"
+			(uuid "10709d89-247d-4e11-8804-9bacff6ec33b")
+		)
+		(pin "7"
+			(uuid "bb62fd9a-7619-418e-88f5-edef7288931d")
+		)
+		(pin "1"
+			(uuid "d3120f13-507d-41ef-815a-9d5546555158")
+		)
+		(pin "20"
+			(uuid "62889f92-5073-4f2f-aeb0-b393c4a110fd")
+		)
+		(pin "10"
+			(uuid "e4994fc7-685e-4c30-9218-c19f294b8a66")
+		)
+		(pin "15"
+			(uuid "1ad9150e-a6f4-4b4e-8fd8-ce617ecbfb27")
+		)
+		(pin "12"
+			(uuid "33591264-aad6-42c9-b1d6-51142659ed5a")
+		)
+		(pin "14"
+			(uuid "283a8d2c-3610-4307-8962-a171fee69d4e")
+		)
+		(pin "13"
+			(uuid "52ce3c52-1751-4bd2-9060-747287e27b35")
+		)
+		(pin "3"
+			(uuid "b387229a-cfce-4fa4-8b22-449d11eee42e")
+		)
+		(pin "5"
+			(uuid "b3f8c357-8b98-4535-839d-e91c50ef363d")
+		)
+		(pin "8"
+			(uuid "d221b9ef-f54d-4da5-ab82-674d3718e7ca")
+		)
+		(pin "16"
+			(uuid "7a35b664-698c-441d-8097-507c65b38ffa")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U23")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U73")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 95.25 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5553670d-b2cd-4b46-8351-637f473ecc26")
+		(property "Reference" "U6"
+			(at 88.9 38.0999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 88.9 40.6399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 95.25 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 95.25 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 95.25 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "ada8cf38-4306-4c44-89f4-f5ef13d46a15")
+		)
+		(pin "1"
+			(uuid "b2b4a1a3-779b-4b7c-8f55-aea88c84a937")
+		)
+		(pin "3"
+			(uuid "17113d86-cc44-41d8-816b-9ed0b0984de2")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U6")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U56")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 85.09 59.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "563343e4-f9c0-4ab1-8e04-58f7fbf70e20")
+		(property "Reference" "U11"
+			(at 78.74 59.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 78.74 62.2299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 85.09 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 85.09 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 85.09 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "b4959c48-dee0-4221-a189-1c0b70362444")
+		)
+		(pin "1"
+			(uuid "f31ff7d6-7525-4432-9ffa-61560c21d958")
+		)
+		(pin "3"
+			(uuid "ecbd7ed1-98e3-41fa-aa49-d8a7b97a436a")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U11")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U61")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 64.77 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "60685a1a-e79d-4912-ad5d-880592ff5970")
+		(property "Reference" "U15"
+			(at 58.42 81.2799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 58.42 83.8199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 64.77 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 64.77 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 64.77 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a9af7d34-e8c4-4597-bab5-15ce55304a1f")
+		)
+		(pin "1"
+			(uuid "e4399adb-a0d6-419e-bb4f-968c090b0a27")
+		)
+		(pin "3"
+			(uuid "d7f7af73-3122-4d36-8856-5aeb27346551")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U15")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U65")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 54.61 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6eee63d3-e12d-4289-ac4b-5e3edb368fd7")
+		(property "Reference" "U2"
+			(at 48.26 38.0999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 48.26 40.6399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 54.61 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 54.61 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 54.61 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "0c7af9dc-b6f9-4307-8feb-de78f60b65d8")
+		)
+		(pin "1"
+			(uuid "4bb36b9c-df18-43dc-a06c-3d79a0bbca94")
+		)
+		(pin "3"
+			(uuid "5eedc817-af7b-4aad-b3bb-d9eeef04d5fc")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U2")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U52")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 85.09 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "700633c0-88bf-447e-ba03-5f4706568149")
+		(property "Reference" "U17"
+			(at 78.74 81.2799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 78.74 83.8199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 85.09 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 85.09 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 85.09 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "7323b2dc-786f-455d-a158-3de6e50cd0d5")
+		)
+		(pin "1"
+			(uuid "8461a785-0663-466d-ba6d-51d835f74982")
+		)
+		(pin "3"
+			(uuid "25bfa050-de82-43ac-8651-1d5ed894db2d")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U17")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U67")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 74.93 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a2e12a7c-3c8b-4c4a-852b-ba0913b49cc7")
+		(property "Reference" "U4"
+			(at 68.58 38.0999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 68.58 40.6399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 74.93 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 74.93 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 74.93 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "ba8f06f1-af8b-4efe-aac0-dec8bdfae0e8")
+		)
+		(pin "1"
+			(uuid "938865f8-5753-4e61-91ba-cc9ba9770cb0")
+		)
+		(pin "3"
+			(uuid "6357e154-5d71-49c4-87d7-54fe6ef1110d")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U4")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U54")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 74.93 59.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a5919461-4787-460b-92df-cde1e8384cc9")
+		(property "Reference" "U10"
+			(at 68.58 59.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 68.58 62.2299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 74.93 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 74.93 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 74.93 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "33280351-c354-4b18-b839-5be570b28599")
+		)
+		(pin "1"
+			(uuid "7d174788-b2ee-4946-b269-a9ac4f626e84")
+		)
+		(pin "3"
+			(uuid "950a6e8c-2101-486c-b807-930b13504c44")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U10")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U60")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 54.61 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b61dc5c4-91f0-40bf-ba9f-8075d9591d16")
+		(property "Reference" "U14"
+			(at 48.26 81.2799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 48.26 83.8199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 54.61 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 54.61 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 54.61 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "fbe9b218-79e6-4a9f-b9fa-53d085d79cf4")
+		)
+		(pin "1"
+			(uuid "0527d2dd-bb0b-4bcc-a1cb-e250204810d0")
+		)
+		(pin "3"
+			(uuid "9a740720-7cc1-4d03-b4b7-8b29caa68363")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U14")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U64")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 44.45 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bbaa2e21-8554-4676-9561-971be4fe13b0")
+		(property "Reference" "U1"
+			(at 38.1 38.0999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 38.1 40.6399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 44.45 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 44.45 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 44.45 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "13ab8f73-eede-4a18-8edc-318f45b56a5d")
+		)
+		(pin "1"
+			(uuid "21dead58-8b0b-4c4c-b662-2b267db7818f")
+		)
+		(pin "3"
+			(uuid "bc1918fe-f651-47cb-9460-395e3c4eb14e")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U1")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U51")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 44.45 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c00e35b1-6959-4a17-a990-2c0c960820be")
+		(property "Reference" "U13"
+			(at 38.1 81.2799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 38.1 83.8199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 44.45 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 44.45 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 44.45 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "24d4301b-11a4-4791-9f70-3ad536d784a8")
+		)
+		(pin "1"
+			(uuid "194c8235-eb8c-48ad-ae7d-2fc66a64804c")
+		)
+		(pin "3"
+			(uuid "15b1e690-4ac7-4766-968f-5445a04b4155")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U13")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U63")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 44.45 59.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c165814d-68ea-4444-bc70-6fa175fe9321")
+		(property "Reference" "U7"
+			(at 38.1 59.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 38.1 62.2299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 44.45 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 44.45 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 44.45 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "88cbbaed-8b55-4d87-aeec-78dbcdff5d51")
+		)
+		(pin "1"
+			(uuid "04eb943b-886b-4feb-af2c-c178a3237d36")
+		)
+		(pin "3"
+			(uuid "42e46df6-7c82-4b3a-9ad3-f75ee8634633")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U7")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U57")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 163.83 133.35 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c5df3bbb-083f-45e3-8ebd-76e1d846fa73")
+		(property "Reference" "C23"
+			(at 161.29 134.62 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 161.798 132.08 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 167.64 132.3848 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 163.83 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 163.83 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "573fb47b-fdbd-4478-8907-ddc9bc10e23b")
+		)
+		(pin "1"
+			(uuid "b5c662ea-f8ca-4862-abb6-d79b464a7351")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "C23")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "C73")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 64.77 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c7e0f129-a9dd-425f-bd55-9523dad1b998")
+		(property "Reference" "U3"
+			(at 58.42 38.0999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 58.42 40.6399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 64.77 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 64.77 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 64.77 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "f7712187-415c-4757-a31d-996457d33e7c")
+		)
+		(pin "1"
+			(uuid "e8748ec6-2b45-40f4-b95a-363c17c968ee")
+		)
+		(pin "3"
+			(uuid "54ed50b7-d1d3-4f12-981c-86359e48603f")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U3")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U53")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 54.61 59.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "de1eb300-3b32-4d7f-a60e-eecc205cfaa6")
+		(property "Reference" "U8"
+			(at 48.26 59.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 48.26 62.2299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 54.61 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 54.61 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 54.61 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "cb38bb41-2f64-4b98-9a24-bcb3ff09622d")
+		)
+		(pin "1"
+			(uuid "6b1ee599-57b0-4ee3-b991-3cb2de715a5b")
+		)
+		(pin "3"
+			(uuid "cba5f3a3-6266-4116-b635-2f445001859c")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U8")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U58")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 64.77 59.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e5e16609-d599-4a46-8d8e-c74f029cf239")
+		(property "Reference" "U9"
+			(at 58.42 59.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 58.42 62.2299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 64.77 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 64.77 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 64.77 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "4a20c347-135f-4e16-81b5-18d474110431")
+		)
+		(pin "1"
+			(uuid "3b345e14-c34b-4c65-bd9c-a0d4f9af98b1")
+		)
+		(pin "3"
+			(uuid "c051ea12-2f0d-468d-addf-9782f5936792")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U9")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U59")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 95.25 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e6f0f048-d0c8-40ef-8d80-398aa752ef6a")
+		(property "Reference" "U18"
+			(at 88.9 81.2799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 88.9 83.8199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 95.25 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 95.25 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 95.25 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1ecce8f7-3437-408e-8e6c-b5fd773f1a70")
+		)
+		(pin "1"
+			(uuid "c7b0c5eb-22cf-4fa3-9c85-6fb3d1d546e0")
+		)
+		(pin "3"
+			(uuid "04d53d88-ea85-4ae9-928e-c0372d443f8a")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U18")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U68")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 85.09 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f7509b30-0f83-46e4-97b7-bc96cdfdc964")
+		(property "Reference" "U5"
+			(at 78.74 38.0999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 78.74 40.6399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 85.09 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 85.09 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 85.09 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "130a780d-2f92-4248-bd7f-5c0867733f50")
+		)
+		(pin "1"
+			(uuid "88da1608-9076-4571-a8cf-89627e52af47")
+		)
+		(pin "3"
+			(uuid "c0a71ba8-2e57-4a2e-92e2-828ccbc8665b")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U5")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U55")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:DRV5055A3xDBZxQ1")
+		(at 44.45 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f9eab9e9-6b15-4c75-9ebd-eb8fe1fdcfe7")
+		(property "Reference" "U19"
+			(at 38.1 102.8699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DRV5055"
+			(at 38.1 105.4099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 44.45 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/drv5055-q1.pdf"
+			(at 44.45 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "25 mV/mT,±85-mT, 20-kHz, 3.3/5V, SOT-23"
+			(at 44.45 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "7a249d01-3bb4-4339-af12-3b50b33bf333")
+		)
+		(pin "1"
+			(uuid "1cbfb22c-44d3-40fb-8c6d-357a74ff6676")
+		)
+		(pin "3"
+			(uuid "5d68ed6f-85b5-411f-986e-bfe8a0941496")
+		)
+		(instances
+			(project "unchat_keeb_v2"
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/1eb0a93c-08dc-4a79-b9f6-56d1ed1a784e"
+					(reference "U19")
+					(unit 1)
+				)
+				(path "/3e5f2643-150c-4ce4-934d-070b80064a45/85c76540-8a38-46e5-a761-f41f81d52b69"
+					(reference "U69")
+					(unit 1)
+				)
+			)
+		)
+	)
+)
