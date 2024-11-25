@@ -13,6 +13,8 @@ serde-json = { package = "serde-json-core", version = "0.5", features = [ "custo
 heapless = { version = "0.8", features = [ "serde" ] }
 usb-device = "0.2"
 usbd-hid = "0.6"
+# test
+usbd-human-interface-device = "0.4.5"
 
 [profile.dev]
 codegen-units = 1
@@ -47,4 +49,3 @@ path = "src/lib/mod.rs"
 name = "rp_pico"
 test = false
 bench = false
-
