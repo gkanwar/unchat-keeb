@@ -1,0 +1,53 @@
+[package]
+name = "unchat_firmware_v2"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ehal = { package = "embedded-hal", version = "0.2.*" }
+cortex-m = "0.7"
+cortex-m-rt = "0.7"
+adafruit-qt-py-rp2040 = "0.8"
+serde = { version = "1.0", default-features = false, features = [ "derive" ] }
+serde-json = { package = "serde-json-core", version = "0.5", features = [ "custom-error-messages"] }
+heapless = { version = "0.8", features = [ "serde" ] }
+usb-device = "0.3"
+usbd-hid = "0.8"
+usbd-serial = "0.2"
+# for neopixel RGB led
+ws2812-pio = "0.8"
+smart-leds = { package = "smart-leds-trait", version = "0.2" }
+
+[profile.dev]
+codegen-units = 1
+debug = 2
+debug-assertions = true
+incremental = false
+opt-level = 3
+overflow-checks = true
+
+[profile.release]
+codegen-units = 1
+debug = 2
+debug-assertions = false
+incremental = false
+lto = 'fat'
+opt-level = 3
+overflow-checks = false
+
+[profile.test]
+codegen-units = 1
+debug = 2
+debug-assertions = true
+incremental = false
+opt-level = 3
+overflow-checks = true
+
+[lib]
+name = "keeb"
+path = "src/lib/mod.rs"
+
+[[bin]]
+name = "rp_qtpy"
+test = false
+bench = false
