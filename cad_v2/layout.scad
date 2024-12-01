@@ -18,9 +18,9 @@ module cherry_1u_array(nx, ny, letters, with_kc) {
 
 module switches(with_kc=true) {
   cherry_1u_array(4, 3,
-    ["W", "E", "R", "T",
-    "S", "D", "F", "G",
-    "X", "C", "V", "B"],
+    ["W", "F", "P", "B",
+    "R", "S", "T", "G",
+    "X", "C", "D", "V"],
     with_kc=with_kc);
   translate([-2*cdx, 0*cdy, 0])
   cherry_1u_array(2, 3,
@@ -168,7 +168,7 @@ module components() {
   rj45();
 }
 
-do_switches(with_kc=false);
+do_switches(with_kc=true);
 pcb();
 components();
 translate([0, 0, -3])

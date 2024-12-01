@@ -15,9 +15,9 @@ module choc_1u_array(nx, ny, letters, with_kc) {
 
 module layout_lh(with_kc=true) {
   choc_1u_array(4, 3,
-    ["W", "E", "R", "T",
-    "S", "D", "F", "G",
-    "X", "C", "V", "B"],
+    ["W", "F", "P", "B",
+    "R", "S", "T", "G",
+    "X", "C", "D", "V"],
     with_kc=with_kc);
   translate([-2*cdx, -0.5*cdy, 0])
   choc_1u_array(2, 3,
@@ -35,13 +35,13 @@ module layout_lh(with_kc=true) {
 
 module layout_rh(with_kc=true) {
   choc_1u_array(4, 3,
-    ["Y", "U", "I", "O",
-    "H", "J", "K", "L",
-    "N", "M", ",", "."],
+    ["J", "L", "U", "Y",
+    "M", "N", "E", "I",
+    "K", "H", ",", "."],
     with_kc=with_kc);
   translate([4*cdx, -0.5*cdy, 0])
   choc_1u_array(2, 3,
-    ["P", " ", ";", " ", "/", " "],
+    ["[", " ", "O", " ", "/", " "],
     with_kc=with_kc);
   translate([(3-1.25)*cdx, -1.1*cdy, 0])
   choc_1u(with_kc=with_kc);
