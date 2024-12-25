@@ -4,6 +4,7 @@ use serde::ser::Error as SError;
 use core::result::Result;
 use heapless::Vec;
 use core::str;
+use core::fmt::Write;
 
 use crate::prelude::*;
 
@@ -43,22 +44,37 @@ impl<'de> Deserialize<'de> for LayoutKind {
 }
 
 pub struct Layout {
-  pub positions: Vec<(usize, usize), MAX_KEYS>,
+  pub matrix_pos: Vec<(usize, usize), MAX_KEYS>,
+  pub render_pos: Vec<(usize, usize), MAX_KEYS>,
+  pub render_rows: usize,
+  pub render_cols: usize,
 }
 
 pub fn get_layout(kind: LayoutKind) -> Layout {
   match kind {
     LayoutKind::LayoutSplit3x6_2 => {
       let n_keys = 2*(3*6 + 2);
-      let pos = [
+      let matrix_pos = [
         (0,0), (0,1), (0,2), (0,3), (0,4), (0,5), (4,0), (4,1), (4,2), (4,3), (4,4), (4,5),
         (1,0), (1,1), (1,2), (1,3), (1,4), (1,5), (5,0), (5,1), (5,2), (5,3), (5,4), (5,5),
         (2,0), (2,1), (2,2), (2,3), (2,4), (2,5), (6,0), (6,1), (6,2), (6,3), (6,4), (6,5),
         (3,0), (3,1), (7,0), (7,1),
       ];
-      assert_eq!(pos.len(), n_keys);
+      let render_pos = [
+        (0,0), (0,1), (0,2), (0,3), (0,4), (0,5), (0,7), (0,8), (0,9), (0,10), (0,11), (0,12),
+        (1,0), (1,1), (1,2), (1,3), (1,4), (1,5), (1,7), (1,8), (1,9), (1,10), (1,11), (1,12),
+        (2,0), (2,1), (2,2), (2,3), (2,4), (2,5), (2,7), (2,8), (2,9), (2,10), (2,11), (2,12),
+        (3,4), (3,5), (3,7), (3,8),
+      ];
+      let render_rows = 4;
+      let render_cols = 13;
+      assert_eq!(matrix_pos.len(), n_keys);
+      assert_eq!(render_pos.len(), n_keys);
       Layout {
-        positions: Vec::from_slice(&pos).unwrap()
+        matrix_pos: Vec::from_slice(&matrix_pos).unwrap(),
+        render_pos: Vec::from_slice(&render_pos).unwrap(),
+        render_rows,
+        render_cols,
       }
     }
   }
@@ -232,6 +248,17 @@ make_behavior_enum!(
   (Semicolon, "KC_SCLN"),
   (Equals, "KC_EQL"),
   (Minus, "KC_MINS"),
+  (Caret, "KC_CIRC"),
+  (Percent, "KC_PERC"),
+  (Exclamation, "KC_EXLM"),
+  (LParen, "KC_LPRN"),
+  (RParen, "KC_RPRN"),
+  (At, "KC_AT"),
+  (Ampersand, "KC_AMPR"),
+  (Asterisk, "KC_ASTR"),
+  (Hash, "KC_HASH"),
+  (Tilde, "KC_TILD"),
+  (Dollar, "KC_DLR"),
   // special functions
   (PrintScreen, "KC_PSCR"),
   (VolMute, "KC_MUTE"),
@@ -256,6 +283,81 @@ make_behavior_enum!(
   (BacklightDown, "BL_DOWN"),
   (Reset, "QK_BOOT"),
 );
+
+pub fn behavior_to_utf8(b: Behavior) -> Vec<u8, 64> {
+  let mut buf = WriteBuf::<64>::new();
+  use Behavior::*;
+  match b {
+    LayerGoto(i) => write!(buf, "TO{}", i),
+    LayerMod(i) => write!(buf, "MO{}", i),
+    LayerToggle(i) => write!(buf, "TG{}", i),
+    LayerTapToggle(i) => write!(buf, "TT{}", i),
+    Enter => write!(buf, "⮐"),
+    Tab => write!(buf, "Tab"),
+    Space => write!(buf, "Spc"),
+    Backspace => write!(buf, "Bsp"),
+    Escape => write!(buf, "Esc"),
+    ArrowUp => write!(buf, "↑"),
+    ArrowDown => write!(buf, "↓"),
+    ArrowLeft => write!(buf, "←"),
+    ArrowRight => write!(buf, "→"),
+    Home => write!(buf, "Hom"),
+    End => write!(buf, "End"),
+    PageUp => write!(buf, "PgU"),
+    PageDown => write!(buf, "PgD"),
+    Delete => write!(buf, "Del"),
+    A => write!(buf, "A"),
+    B => write!(buf, "B"),
+    C => write!(buf, "C"),
+    D => write!(buf, "D"),
+    E => write!(buf, "E"),
+    F => write!(buf, "F"),
+    G => write!(buf, "G"),
+    H => write!(buf, "H"),
+    I => write!(buf, "I"),
+    J => write!(buf, "J"),
+    K => write!(buf, "K"),
+    L => write!(buf, "L"),
+    M => write!(buf, "M"),
+    N => write!(buf, "N"),
+    O => write!(buf, "O"),
+    P => write!(buf, "P"),
+    Q => write!(buf, "Q"),
+    R => write!(buf, "R"),
+    S => write!(buf, "S"),
+    T => write!(buf, "T"),
+    U => write!(buf, "U"),
+    V => write!(buf, "V"),
+    W => write!(buf, "W"),
+    X => write!(buf, "X"),
+    Y => write!(buf, "Y"),
+    Z => write!(buf, "Z"),
+    Num0 => write!(buf, "0"),
+    Num1 => write!(buf, "1"),
+    Num2 => write!(buf, "2"),
+    Num3 => write!(buf, "3"),
+    Num4 => write!(buf, "4"),
+    Num5 => write!(buf, "5"),
+    Num6 => write!(buf, "6"),
+    Num7 => write!(buf, "7"),
+    Num8 => write!(buf, "8"),
+    Num9 => write!(buf, "9"),
+    Comma => write!(buf, ","),
+    Dot => write!(buf, "."),
+    Slash => write!(buf, "/"),
+    Backslash => write!(buf, "\\"),
+    Quote => write!(buf, "'"),
+    LBrace => write!(buf, "["),
+    RBrace => write!(buf, "]"),
+    LCtrl | RCtrl => write!(buf, "Ctl"),
+    LAlt | RAlt => write!(buf, "Alt"),
+    LShift | RShift => write!(buf, "Sft"),
+    LGui | RGui => write!(buf, "Cmd"),
+    // TODO: other symbols
+    _ => write!(buf, "<?>"),
+  }.unwrap();
+  return buf.data;
+}
 
 #[cfg(test)]
 mod tests {

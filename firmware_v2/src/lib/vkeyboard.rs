@@ -1,9 +1,10 @@
 use heapless::Vec;
 use core::result::Result;
+use core::fmt;
 
 use crate::prelude::*;
 use crate::usb::{KeyUsageAndIndex, NKROBootKeyboardReport, KeyboardUsage};
-use crate::layout::{Behavior, Keymap};
+use crate::layout::{Behavior, Keymap, get_layout, behavior_to_utf8};
 
 // Virtual keyboard state follows the QMK model:
 // - One default layer that is always active
@@ -108,6 +109,18 @@ fn behavior_to_action(behavior: Behavior) -> Action {
     Comma => SendKey(Kui::new(KeyboardCommaLess)),
     Dot => SendKey(Kui::new(KeyboardPeriodGreater)),
     Slash => SendKey(Kui::new(KeyboardSlashQuestion)),
+    // TODO: shifted symbols
+    Caret => Nothing,
+    Percent => Nothing,
+    Exclamation => Nothing,
+    LParen => Nothing,
+    RParen => Nothing,
+    At => Nothing,
+    Ampersand => Nothing,
+    Asterisk => Nothing,
+    Hash => Nothing,
+    Tilde => Nothing,
+    Dollar => Nothing,
     /* _ => SendKey(Kui::new(KeyboardCapsLock)), */
     F1 => SendKey(Kui::new(KeyboardF1)),
     F2 => SendKey(Kui::new(KeyboardF2)),
@@ -164,6 +177,23 @@ fn behavior_to_action(behavior: Behavior) -> Action {
   }
 }
 
+fn set_key_down(kd_mask: &mut KeyMask, idx: usize, down: bool) {
+  let kd_idx = idx / KEY_MASK_WIDTH as usize;
+  let kd_bit = idx % KEY_MASK_WIDTH;
+  if down {
+    kd_mask[kd_idx] |= (1 << kd_bit) as u32;
+  }
+  else {
+    kd_mask[kd_idx] &= !((1 << kd_bit) as u32);
+  }
+}
+
+fn get_key_down(kd_mask: &KeyMask, idx: usize) -> bool {
+  let kd_idx = idx / KEY_MASK_WIDTH as usize;
+  let kd_bit = idx % KEY_MASK_WIDTH;
+  ((kd_mask[kd_idx] >> kd_bit) & 1) == 1
+}
+
 impl VKeyboard {
   pub fn new(keymap: Keymap) -> Result<Self, Error> {
     Ok(Self {
@@ -171,7 +201,7 @@ impl VKeyboard {
       active_layer_mask: 0,
       key_down_layer: [0; MAX_KEYS],
       key_down_mask: [0; KEY_MASK_LEN],
-      keymap: keymap,
+      keymap,
       usb_report: NKROBootKeyboardReport::default(),
       reset: false,
     })
@@ -271,8 +301,8 @@ impl VKeyboard {
       if let Behavior::Transparent = behavior {
         continue;
       }
-      // TODO: set virtual state
       let action = behavior_to_action(behavior);
+      set_key_down(&mut self.key_down_mask, idx as usize, true);
       self.key_down_layer[idx as usize] = i as LayerIndex;
       match action {
         Action::SendKey(kui) => {
@@ -292,7 +322,7 @@ impl VKeyboard {
   }
 
   fn key_up(&mut self, idx: KeyIndex) -> Result<bool, Error> {
-    // TODO: check key mask?
+    set_key_down(&mut self.key_down_mask, idx as usize, false);
     let layer = self.key_down_layer[idx as usize];
     let behavior = self.keymap.layers[layer as usize][idx as usize];
     let action = behavior_to_action(behavior);
@@ -311,9 +341,60 @@ impl VKeyboard {
     }
   }
 
+  fn render_state(&self, write_fmt: impl Fn(fmt::Arguments) -> ()) {
+    let layout = get_layout(self.keymap.layout);
+    // clear
+    // write!(log, "\x1b[2J").ok();
+    // reset style, move cursor to (0,0)
+    write_fmt(format_args!("\x1b[0m\x1b[H"));
+    // draw matrix
+    for i in 0..layout.render_rows {
+      for j in 0..layout.render_cols {
+        let idx = layout.render_pos.iter().position(|(a,b)| (*a,*b) == (i,j));
+        match idx {
+          Some(idx) => if get_key_down(&self.key_down_mask, idx) {
+            let l = self.key_down_layer[idx as usize];
+            let behavior = self.keymap.layers[l as usize][idx as usize];
+            let key_utf8 = behavior_to_utf8(behavior);
+            write_fmt(format_args!("\x1b[30;47m")); // black on white
+            write_fmt(format_args!("{:^3}", core::str::from_utf8(&key_utf8[..]).unwrap()));
+            write_fmt(format_args!("\x1b[0m")); // reset style
+          }
+          else {
+            // TODO: lift common behavior resolution code into separate fn
+            for i in (0..self.keymap.layers.len()).rev() {
+              if i != self.default_layer as usize && (self.active_layer_mask >> i) & 1 == 0 {
+                continue;
+              }
+              if idx as usize >= self.keymap.layers[i].len() {
+                continue;
+              }
+              let behavior = self.keymap.layers[i][idx as usize];
+              if let Behavior::Transparent = behavior {
+                continue;
+              }
+              let key_utf8 = behavior_to_utf8(behavior);
+              write_fmt(format_args!("{:^3}", core::str::from_utf8(&key_utf8[..]).unwrap()));
+              break;
+            };
+          }
+          None => {
+            write_fmt(format_args!("   "));
+          }
+        }
+        write_fmt(format_args!(" "));
+      }
+      write_fmt(format_args!("\r\n"));
+    }
+    write_fmt(format_args!("\r\n\r\n"));
+    write_fmt(format_args!("{:#064b}\r\n", self.key_down_mask[0]));
+    write_fmt(format_args!("{:#064b}\r\n", self.key_down_mask[1]));
+  }
+
   pub fn update(
     &mut self,
-    key_events: Vec<KeyEvent, BUS_WIDTH>)
+    key_events: Vec<KeyEvent, BUS_WIDTH>,
+    write_fmt: impl Fn(fmt::Arguments) -> ())
     -> Result<bool, Error>
   {
     let mut updated = false;
@@ -327,6 +408,7 @@ impl VKeyboard {
         break;
       }
     }
+    self.render_state(write_fmt);
     Ok(updated)
   }
 

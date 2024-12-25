@@ -45,7 +45,7 @@ use usbd_serial::{
 
 use keeb::{
   prelude::*,
-  Error,
+  error::Error,
   layout::Keymap,
   board::Board,
   bus::AnalogBus,
@@ -66,31 +66,18 @@ fn get_np_color(state: NpState) -> RGB8 {
   }
 }
 
-struct WriteBuf {
-  data: Vec<u8, 1024>
-}
-impl WriteBuf {
-  fn new() -> Self {
-    Self { data: Vec::new() }
-  }
-}
-impl fmt::Write for WriteBuf {
-  fn write_str(&mut self, s: &str) -> fmt::Result {
-    let n = s.len().min(self.data.capacity() - self.data.len());
-    self.data.extend_from_slice(s[..n].as_bytes()).map_err(|_| fmt::Error::default())
-  }
-}
-
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
   // set panic led
   set_neopixel(NpState::Panic);
   // write panic info to serial repeatedly
-  let mut buf = WriteBuf::new();
-  writeln!(&mut buf, "Panic: {}\r\n", info).ok();
+  let mut buf = WriteBuf::<1024>::new();
+  write!(&mut buf, "Panic: {}\r\n", info).ok();
   loop {
-    write_serial(&buf.data[..]);
-    drain_serial();
+    for chunk in buf.data[..].chunks(128) {
+      write_serial(chunk);
+      drain_serial();
+    }
     safe_delay_ms(200);
     set_neopixel(NpState::Off);
     safe_delay_ms(800);
@@ -451,12 +438,11 @@ fn rp2040_main() -> ! {
     pac::NVIC::unmask(pac::Interrupt::USBCTRL_IRQ);
   }
 
-  safe_delay_ms(5000);
   write_serial(b"Unchat-40 firmware loading...\r\n");
 
   // load keymap
   let (keymap, _bytes_read): (Keymap, usize) =
-    serde_json::from_slice(include_bytes!("../../keymaps/split-40-colemak.json"))
+    serde_json::from_slice(include_bytes!("../../keymaps/split-40-colemak-callum.json"))
     .unwrap();
   let layout = keeb::layout::get_layout(keymap.layout);
   write_serial(b"Loaded keymap.\r\n");
@@ -500,12 +486,14 @@ fn rp2040_main() -> ! {
       Some(delay) => delay,
       None => panic!("missing delay"),
     };
-    delay.delay_ms(100);
+    delay.delay_ms(1);
+    // let mut log_buf = WriteBuf::<4196>::new();
     let (updated, new_bus) = keeb::tick(
-      bus, &mut switches, &mut vkbd, delay, |x: fmt::Arguments| {
-        write_fmt_serial(x);
+      bus, &mut switches, &mut vkbd, delay, |args: fmt::Arguments<'_>| {
+        // write_fmt_serial(args);
       }
     ).unwrap();
+    // write_serial(&log_buf.data[..]);
     bus = new_bus;
     return_delay(delay_cell);
 
@@ -514,7 +502,7 @@ fn rp2040_main() -> ! {
     }
 
     let report = if updated || pending {
-      write_fmt_serial(format_args!("Kbd keys: {:?}\r\n", vkbd.get_report().nkro_keys));
+      // write_fmt_serial(format_args!("Kbd keys: {:?}\r\n", vkbd.get_report().nkro_keys));
       Some(vkbd.get_report().clone())
     }
     else {
@@ -548,7 +536,6 @@ fn rp2040_main() -> ! {
                   }
                   _ => {}
                 }
-                /* FORNOW: skip and replace with logging to serial
                 match usb_kbd_class.push_input(&report) {
                   Ok(size) => {
                     pending = false;
@@ -568,7 +555,6 @@ fn rp2040_main() -> ! {
                   },
                   Err(err) => panic!("unexpected write error"),
                 }
-                 */
               }
               None => {}
             }

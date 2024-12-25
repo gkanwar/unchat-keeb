@@ -82,8 +82,8 @@ pub struct RegMap {
 
 pub fn make_reg_map(board: &Board, layout: &Layout) -> RegMap {
   let mut key_matrix: Matrix::<KeyIndex> = [[0; MAX_COLS]; MAX_ROWS];
-  for idx in 0..layout.positions.len() {
-    let (i,j) = layout.positions[idx];
+  for idx in 0..layout.matrix_pos.len() {
+    let (i,j) = layout.matrix_pos[idx];
     key_matrix[i][j] = idx as KeyIndex;
   }
   let mut regs: Vec<[Option<KeyIndex>; BUS_WIDTH], MAX_REGS> = Vec::new();

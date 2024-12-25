@@ -9,10 +9,8 @@ pub mod board;
 pub mod switch_matrix;
 pub mod vkeyboard;
 pub mod usb;
-
 pub mod error;
-// re-export all error types
-pub use crate::error::*;
+pub mod basic;
 
 pub mod prelude {
   pub const BUS_WIDTH: usize = 4;
@@ -20,8 +18,9 @@ pub mod prelude {
   
   pub const MAX_KEYS: usize = 128;
   pub const MAX_LAYERS: usize = 8;
-  pub const KEY_MASK_LEN: usize = MAX_KEYS / 64;
-  pub type KeyMask = [u64; KEY_MASK_LEN];
+  pub const KEY_MASK_WIDTH: usize = 32;
+  pub const KEY_MASK_LEN: usize = MAX_KEYS / KEY_MASK_WIDTH;
+  pub type KeyMask = [u32; KEY_MASK_LEN];
   pub type KeyIndex = u8;
   pub type LayerMask = u8;
   pub type LayerIndex = u8;
@@ -51,6 +50,8 @@ pub mod prelude {
     fn try_into_input_pin(self) -> Result<Self::Pin, Error>;
   }
 
+  // re-export all basic types
+  pub use crate::basic::*;
   // re-export all error types
   pub use crate::error::*;
 }
@@ -68,13 +69,14 @@ pub fn tick<D: DelayUs<u32>, Q: OutputPin<Error=Infallible>, B: bus::AnalogBus>(
   mut bus: B,
   switches: &mut switch_matrix::SwitchMatrix<Q>,
   vkbd: &mut vkeyboard::VKeyboard,
-  delay: &mut D, write_fmt: impl Fn(core::fmt::Arguments) -> ())
+  delay: &mut D,
+  write_fmt: impl Fn(core::fmt::Arguments) -> ())
   -> Result<(bool, B), Error>
 {
   let mut updated = false;
   for i in 0..switches.num_regs() {
     let key_events = switches.subtick(i as RegIndex, &mut bus, delay, &write_fmt)?;
-    let now_updated = vkbd.update(key_events)?;
+    let now_updated = vkbd.update(key_events, &write_fmt)?;
     updated = updated || now_updated;
     if vkbd.reset {
       break;

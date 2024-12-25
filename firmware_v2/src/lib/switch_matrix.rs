@@ -118,7 +118,8 @@ impl<Q: OutputPin> SwitchMatrix<Q> {
   }
 
   pub fn subtick<D: DelayUs<u32>, B: AnalogBus>(
-    &mut self, i_reg: RegIndex, bus: &mut B, delay: &mut D, write_fmt: impl Fn(core::fmt::Arguments) -> ())
+    &mut self, i_reg: RegIndex, bus: &mut B, delay: &mut D,
+    write_fmt: impl Fn(core::fmt::Arguments) -> ())
     -> Result<Vec<KeyEvent, BUS_WIDTH>, Error>
   {
     let reg_state = &mut self.reg_state[i_reg as usize];

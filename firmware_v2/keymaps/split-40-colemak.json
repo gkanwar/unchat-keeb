@@ -45,8 +45,8 @@
       "KC_BSLS",
       "KC_LGUI",
       "KC_LSFT",
-      "TT(1)",
-      "KC_SPC"
+      "KC_SPC",
+      "TT(1)"
     ],
     [
       "KC_TRNS",
@@ -81,7 +81,7 @@
       "KC_NO",
       "TO(0)",
       "TO(3)",
-      "KC_TRNS",
+      "KC_BSPC",
       "KC_TRNS",
       "KC_TRNS",
       "KC_TRNS",

@@ -4,7 +4,7 @@
   "documentation": "\"This file is a QMK Configurator export. You can import this at <https://config.qmk.fm>. It can also be used directly with QMK's source code.\n\nTo setup your QMK environment check out the tutorial: <https://docs.qmk.fm/#/newbs>\n\nYou can convert this file to a keymap.c using this command: `qmk json2c {keymap}`\n\nYou can compile this keymap using this command: `qmk compile {keymap}`\"\n",
   "keyboard": "beekeeb/piantor",
   "keymap": "unchat40",
-  "layout": "LAYOUT_split_3x6_2",
+  "layout": "LAYOUT_split_3x6_3",
   "layers": [
     [
       "KC_TAB",
@@ -45,6 +45,8 @@
       "KC_MINS",
       "MO(1)",
       "KC_LSFT",
+      "KC_NO",
+      "KC_NO",
       "KC_SPC",
       "MO(2)"
     ],
@@ -86,6 +88,8 @@
       "KC_NO",
       "KC_NO",
       "KC_TRNS",
+      "KC_NO",
+      "KC_NO",
       "KC_NO",
       "KC_NO",
       "MO(3)"
@@ -172,6 +176,8 @@
       "KC_TRNS",
       "KC_NO",
       "KC_NO",
+      "KC_NO",
+      "KC_NO",
       "KC_TRNS"
     ],
     [
@@ -203,6 +209,8 @@
       "KC_MUTE",
       "KC_VOLD",
       "KC_VOLU",
+      "KC_NO",
+      "KC_NO",
       "KC_NO",
       "KC_NO",
       "KC_NO",
