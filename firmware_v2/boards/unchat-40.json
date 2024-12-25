@@ -11,60 +11,60 @@
   ],
   "matrix_calibration": [
     [
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4}
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4}
     ],
     [
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4}
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4}
     ],
     [
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4}
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4}
     ],
     [
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4}
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4}
     ],
     [
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4}
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4}
     ],
     [
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4}
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4}
     ],
     [
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4}
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4}
     ],
     [
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4},
-      {"polarity": "S","trig_down": 0.3,"trig_up": 0.4}
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4},
+      {"polarity": "S","trig_down": 0.35,"trig_up": 0.4}
     ]
   ],
   "sel_pins": [24, 25, 20, 5],
